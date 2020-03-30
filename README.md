@@ -3,6 +3,8 @@
 
 Group project created for CodersCamp 2019 (part of Team Warsaw). Check [demo at Heroku](https://tripexpenses.herokuapp.com) and source code at [Github](https://github.com/dobrzyckahanna/TravelPlanner).
 
+You can check source repo at [Project Mentor Github Page](https://github.com/dobrzyckahanna/Trip-Expenses-App).
+
 ## Authors:
 
 - Małgosia and her [Github](https://github.com/ireshka)
