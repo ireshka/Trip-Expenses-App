@@ -1,4 +1,3 @@
-
 require('dotenv').config();
 const config = require('config');
 
@@ -19,6 +18,7 @@ const currencyRouter = require('./routes/currencies');
 const { checkAuthenticated } = require('./middleware/auth')
 
 const app = express();
+console.log(process.env.JWT_PRIVATEKEY);
 
 if (!process.env.JWT_PRIVATEKEY) {
   console.error('FATAL ERROR: jwtPrivateKey is not defined');

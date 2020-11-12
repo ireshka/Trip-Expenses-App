@@ -14,7 +14,6 @@ import {
   NavLinksContainer
 } from './styled';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import getActualCurrencyRates from '../utils/getActualCurrencyRates';
 import { setExchangeRates } from '../redux/actions/userActions';
 const Paragraph = styled.p`
   color: ${theme.colors.neutralDark};
