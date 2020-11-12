@@ -1,17 +1,8 @@
 const mongoose = require('mongoose');
 const Joi = require('@hapi/joi');
-const moment = require ('moment');
+const moment = require('moment');
 
-const supportedCurrencies = [
-  'PLN',
-  'USD',
-  'GBP',
-  'EUR',
-  'JPY',
-  'AUD',
-  'CAD',
-  'CHF'
-];
+const supportedCurrencies = ['PLN', 'USD', 'GBP', 'EUR', 'JPY', 'AUD', 'CAD', 'CHF'];
 
 const defaultCategories = [
   'accomodation',
@@ -28,7 +19,7 @@ const expenseSchema = new mongoose.Schema({
     minlength: 3,
     maxlength: 40,
     trim: true,
-    required: [true, 'You should define expense name']
+    required: [true, 'You should define expense name'],
   },
   category: {
     type: String,
@@ -40,7 +31,7 @@ const expenseSchema = new mongoose.Schema({
     type: Number,
     min: 0,
     max: 10000,
-    required: [true, 'You should define the cost']
+    required: [true, 'You should define the cost'],
   },
   currency: {
     type: String,
@@ -48,7 +39,7 @@ const expenseSchema = new mongoose.Schema({
     minlength: 3,
     maxlength: 3,
     default: 'PLN',
-  }
+  },
 });
 
 const tripSchema = new mongoose.Schema({
@@ -57,19 +48,19 @@ const tripSchema = new mongoose.Schema({
     required: [true, 'You should name your trip'],
     minlength: 5,
     maxlength: 100,
-    trim: true
+    trim: true,
   },
   startDate: {
     type: Date,
     default: moment().format(),
     min: '2019-12-01',
-    max: '2099-12-31'
+    max: '2099-12-31',
   },
   description: {
     type: String,
     minlength: 10,
     maxlength: 200,
-    trim: true
+    trim: true,
   },
   isTripFinished: {
     type: Boolean,
@@ -79,20 +70,22 @@ const tripSchema = new mongoose.Schema({
     type: Number,
     default: 0,
     min: 0,
-    max: 1000000
+    max: 1000000,
   },
   mainCurrency: {
     type: String,
     enum: supportedCurrencies,
-    default: 'PLN'
+    default: 'PLN',
   },
   categories: {
-    type: [{
-      type: String,
-      minlength: 3,
-      maxlength: 30,
-      trim: true
-    }],
+    type: [
+      {
+        type: String,
+        minlength: 3,
+        maxlength: 30,
+        trim: true,
+      },
+    ],
   },
   expenses: [expenseSchema],
 });
@@ -108,26 +101,14 @@ function validateTrip(trip) {
   const tripSchema = Joi.object({
     _id: Joi.object(),
     __v: Joi.number(),
-    name: Joi.string()
-      .trim()
-      .min(5)
-      .max(100)
-      .required(),
+    name: Joi.string().trim().min(5).max(100).required(),
     startDate: Joi.date()
       // .default(Date.now)
       .default(new Date())
       .min('1-12-2019'),
-    description: Joi.string()
-      .trim()
-      .min(10)
-      .max(200),
-    isTripFinished: Joi.boolean()
-      .default('false'),
-    budget: Joi.number()
-      .default(0)
-      .min(0)
-      .max(1000000)
-      .precision(2),
+    description: Joi.string().trim().min(10).max(200),
+    isTripFinished: Joi.boolean().default('false'),
+    budget: Joi.number().default(0).min(0).max(1000000).precision(2),
     mainCurrency: Joi.string()
       .default('PLN')
       .valid(...supportedCurrencies),
@@ -135,13 +116,8 @@ function validateTrip(trip) {
       .default(defaultCategories)
       .max(20)
       .unique()
-      .items(
-        Joi.string()
-          .trim()
-          .min(3)
-          .max(30)
-      ),
-    expenses: Joi.array()
+      .items(Joi.string().trim().min(3).max(30)),
+    expenses: Joi.array(),
   });
 
   return tripSchema.validate(trip);
@@ -150,23 +126,15 @@ function validateTrip(trip) {
 function validateExpense(expenseObject, categoriesArray) {
   const expenseSchema = Joi.object({
     _id: Joi.object(),
-    name: Joi.string()
-      .trim()
-      .min(3)
-      .max(40)
-      .required(),
+    name: Joi.string().trim().min(3).max(40).required(),
     category: Joi.string()
       .required()
       .valid(...categoriesArray),
-      // .valid(Joi.in('/categories')),
-    cost: Joi.number()
-      .min(0)
-      .max(100000)
-      .precision(2)
-      .required(),
+    // .valid(Joi.in('/categories')),
+    cost: Joi.number().min(0).max(100000).precision(2).required(),
     currency: Joi.string()
       .valid(...supportedCurrencies)
-      .required()
+      .required(),
   });
 
   return expenseSchema.validate(expenseObject);

@@ -4,12 +4,11 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { theme } from '../utils/theme';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 import LogoImg from '../images/logo.png';
 import { setLoggedOut, clearState } from '../redux/actions/userActions';
-
 
 const HeaderWrapper = styled.div`
   background-color: ${theme.colors.whiteOverlay};
@@ -68,7 +67,7 @@ const Button = styled.button`
     outline: none;
   }
   &:hover {
-    color:${theme.colors.btnMain};
+    color: ${theme.colors.btnMain};
   }
 `;
 
@@ -93,14 +92,13 @@ const Ul = styled.ul`
 `;
 
 const NavForNotLoggedIn = styled(Ul)`
-  display: ${props => props.showMenu ? 'flex' : 'none'};
+  display: ${(props) => (props.showMenu ? 'flex' : 'none')};
   justify-content: flex-end;
-
 `;
 
 const NavForLoggedIn = styled(Ul)`
   justify-content: space-between;
-  display: ${props => props.showMenu ? 'flex' : 'none'};
+  display: ${(props) => (props.showMenu ? 'flex' : 'none')};
   ${theme.media.tablet} {
     justify-content: flex-end;
   }
@@ -115,48 +113,45 @@ const StyledLink = styled(Link)`
   text-decoration: none;
   color: ${theme.colors.neutralDark};
   font-size: 16px;
-  color: ${props => (
-    props.active === "true" ? theme.colors.neutralDark : theme.colors.neutralMidLight
-  )};
+  color: ${(props) =>
+    props.active === 'true' ? theme.colors.neutralDark : theme.colors.neutralMidLight};
   &:hover {
     color: ${theme.colors.btnMain};
   }
 `;
 
-
-
 class Header extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       menuOpened: true,
-      activeTab: ""
-    }
+      activeTab: '',
+    };
   }
-  
+
   toggleMenu = () => {
     this.setState((prevState, props) => ({
-      menuOpened: !prevState.menuOpened
-    }))
-  }
+      menuOpened: !prevState.menuOpened,
+    }));
+  };
 
   logOut = () => {
     this.props.setLoggedOut();
     this.props.clearState();
     localStorage.removeItem('travelplanner_x-auth-token');
-  }
+  };
 
   setChoosen = (e) => {
     this.setState({
-      activeTab: e.target.id
+      activeTab: e.target.id,
     });
-  }
+  };
 
   render() {
     return (
       <HeaderWrapper>
         <TopLabel>
-          <LogoLink to={"/"} title="HomePage">
+          <LogoLink to={'/'} title="HomePage">
             <Logo src={LogoImg} alt="Trip Expenses App"></Logo>
             <H1>Trip Expenses</H1>
           </LogoLink>
@@ -166,9 +161,7 @@ class Header extends Component {
         </TopLabel>
 
         <Nav>
-          <NavForNotLoggedIn
-            showMenu={this.state.menuOpened && !this.props.isLoggedIn}
-          >
+          <NavForNotLoggedIn showMenu={this.state.menuOpened && !this.props.isLoggedIn}>
             <Li>
               <StyledLink
                 to={'/users/login'}
@@ -193,9 +186,7 @@ class Header extends Component {
             </Li>
           </NavForNotLoggedIn>
 
-          <NavForLoggedIn
-            showMenu={this.state.menuOpened && this.props.isLoggedIn}
-          >
+          <NavForLoggedIn showMenu={this.state.menuOpened && this.props.isLoggedIn}>
             <Li>
               <StyledLink
                 to={'/trips/all'}
@@ -211,33 +202,34 @@ class Header extends Component {
               <StyledLink
                 to={'/users/profile'}
                 title="Settings"
-                onClick={e => this.setChoosen(e)}
+                onClick={(e) => this.setChoosen(e)}
                 active={`${this.state.activeTab === 'profile'}`}
                 id="profile"
               >
                 Settings
               </StyledLink>
             </Li>
-            <Li><Button onClick={this.logOut}>Log out</Button></Li>
+            <Li>
+              <Button onClick={this.logOut}>Log out</Button>
+            </Li>
           </NavForLoggedIn>
         </Nav>
       </HeaderWrapper>
-    )
+    );
   }
-};
-
+}
 
 const mapStateToProps = (state) => {
   return {
-    isLoggedIn: state.isLoggedIn
-  }
-}
+    isLoggedIn: state.isLoggedIn,
+  };
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {
     setLoggedOut: () => dispatch(setLoggedOut()),
-    clearState: () => dispatch(clearState())
-  }
-}
+    clearState: () => dispatch(clearState()),
+  };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

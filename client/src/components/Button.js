@@ -1,4 +1,4 @@
-import React from 'react'; 
+import React from 'react';
 import styled from 'styled-components';
 import { theme } from '../utils/theme';
 
@@ -17,31 +17,32 @@ const DefaultButton = styled.button`
   outline: none;
   box-shadow: 0 0 4px ${theme.colors.neutralLight};
   cursor: pointer;
-  transition: .3s;
+  transition: 0.3s;
 
   &:hover {
     font-weight: 600;
     box-shadow: 0 0 4px ${theme.colors.neutralMidLight};
-  } 
+  }
   &:focus {
-    outline: none;  
-  } 
+    outline: none;
+  }
 `;
 
 const Button = (props) => {
-  // Customize the button adding props textOnButton, textColor, btnColor, btnBorder. 
+  // Customize the button adding props textOnButton, textColor, btnColor, btnBorder.
   // For example: textOnButton="Add" textColor="white" btnColor="green" btnBorder="none"
 
   const btnStyle = {
     color: props.textColor,
     backgroundColor: props.btnColor,
-    border: props.btnBorder
+    border: props.btnBorder,
   };
 
   return (
-    <DefaultButton type="submit" style = {btnStyle}>{props.textOnButton}</DefaultButton>
-  )
-
-}
+    <DefaultButton type="submit" style={btnStyle}>
+      {props.textOnButton}
+    </DefaultButton>
+  );
+};
 
 export default Button;

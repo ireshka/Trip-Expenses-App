@@ -10,18 +10,18 @@ const ContentWrapper = styled.div`
   width: 100%;
   max-width: 900px;
   min-width: 300px;
-  background-color: rgba(255,255,255,0.85);
+  background-color: rgba(255, 255, 255, 0.85);
   margin: 40px auto 40px;
   padding-bottom: 20px;
   box-shadow: 0 0 5px ${theme.colors.neutralMidDark};
   border-radius: 0;
   ${theme.media.landscapePhone} {
-    width: 90%;    
+    width: 90%;
     border-radius: ${theme.radius.bg};
   }
 `;
 
-const HeaderWrapper = styled.div `
+const HeaderWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -58,7 +58,7 @@ const HeaderTextWrapper = styled.div`
 
 const HeaderText = styled.h2`
   font-size: 26px;
-  text-shadow: 0 0 2px 2px ${theme.colors.white};  
+  text-shadow: 0 0 2px 2px ${theme.colors.white};
   ${theme.media.tablet} {
     font-size: 32px;
   }
@@ -86,26 +86,28 @@ const BodyWrapper = styled.div`
 
 class HomePage extends Component {
   render() {
-    return(
+    return (
       <ContentWrapper>
-          <HeaderWrapper>
-            <ImageWrapper>
-              <ImgHomePage src={HomePageImage} alt="Map image"/>
-            </ImageWrapper>          
-            <HeaderTextWrapper>
-              <HeaderText>We help you to manage your travel costs!</HeaderText>
-            </HeaderTextWrapper>          
-          </HeaderWrapper>
-          <BodyWrapper>
-            <List>
-              <ListItem>Record all your travel expenses</ListItem>
-              <ListItem>Expenses in various currencies are  automatically converted to one chosen currency</ListItem>
-              <ListItem>Control your expenses in different categories</ListItem>
-              <ListItem>Check if you remain within your budget</ListItem>
-            </List>
-          </BodyWrapper>        
+        <HeaderWrapper>
+          <ImageWrapper>
+            <ImgHomePage src={HomePageImage} alt="Map image" />
+          </ImageWrapper>
+          <HeaderTextWrapper>
+            <HeaderText>We help you to manage your travel costs!</HeaderText>
+          </HeaderTextWrapper>
+        </HeaderWrapper>
+        <BodyWrapper>
+          <List>
+            <ListItem>Record all your travel expenses</ListItem>
+            <ListItem>
+              Expenses in various currencies are automatically converted to one chosen currency
+            </ListItem>
+            <ListItem>Control your expenses in different categories</ListItem>
+            <ListItem>Check if you remain within your budget</ListItem>
+          </List>
+        </BodyWrapper>
       </ContentWrapper>
-    )
+    );
   }
 }
 export default HomePage;
