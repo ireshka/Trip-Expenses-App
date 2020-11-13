@@ -12,7 +12,7 @@ class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: '',
+      username: '',
       password: '',
       error: '',
     };
@@ -21,7 +21,7 @@ class Login extends React.Component {
   onFormSubmit = async (e) => {
     e.preventDefault();
     const user = {
-      email: this.state.email,
+      username: this.state.username,
       password: this.state.password,
     };
     const url = '/api/users/login';
@@ -57,15 +57,16 @@ class Login extends React.Component {
         <ErrorMessage error={this.state.error}></ErrorMessage>
 
         <Form onSubmit={this.onFormSubmit}>
-          <Label htmlFor="login-email">Email:</Label>
+          <Label htmlFor="login-username">User name:</Label>
           <Input
-            type="email"
-            name="email"
-            id="login-email"
-            placeholder="Email"
+            type="text"
+            name="username"
+            id="login-username"
+            placeholder="User name"
             required
-            onChange={this.onInputChange.bind(this, 'email')}
-            value={this.state.email}
+            // Todo: ??? rewrite without bind
+            onChange={this.onInputChange.bind(this, 'username')}
+            value={this.state.username}
           />
 
           <Label htmlFor="login-password">Password:</Label>
