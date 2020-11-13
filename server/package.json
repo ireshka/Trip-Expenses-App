@@ -1,19 +1,14 @@
 {
   "name": "tripexpenses-server",
   "version": "1.0.0",
-  "description": "app for planning travel budget",
+  "description": "Backend for Trip Expenses app",
   "keywords": [
     "travel",
     "travel costs",
     "travel budget",
     "trip expenses"
   ],
-  "license": "ISC",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/dobrzyckahanna/TravelPlanner.git"
-  },
-  "author": "Warsaw Team CodersCamp 2019",
+  "license": "MIT",
   "scripts": {
     "start": "nodemon server.js"
   },
