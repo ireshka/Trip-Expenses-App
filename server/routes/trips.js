@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const dbDebug = require('debug')('app:db');
 const { Trip, validateTrip, validateExpense } = require('../models/trip');
-const { User, validateUser} = require('../models/user');
+const { User, validateUser } = require('../models/user');
 
 //Add trip
 
@@ -11,27 +11,27 @@ const { User, validateUser} = require('../models/user');
 router.post('/add', (req, res) => {
   const { error, value } = validateTrip(req.body.tripData);
   if (error) {
-    return res.status(400).send(error.details[0].message)
+    return res.status(400).send(error.details[0].message);
   } else {
     const trip = new Trip(value);
-    trip.save()
-      .then(async(trip) => {
+    trip
+      .save()
+      .then(async (trip) => {
         const { userData } = req.body;
-        await User.findByIdAndUpdate(userData, {$push: {trips: trip._id}});
-
+        await User.findByIdAndUpdate(userData, { $push: { trips: trip._id } });
       })
       .then(() => res.json('Trip added!'))
-      .catch((error => res.status(400).json('Error: ' + error)))  
+      .catch((error) => res.status(400).json('Error: ' + error));
   }
 });
 
 // GET trip
 router.get('/:id', async (req, res) => {
-   try {
+  try {
     const trip = await Trip.findById(req.params.id);
-    res.json(trip)
+    res.json(trip);
   } catch (error) {
-    res.status(400).json('Error: ' + error)
+    res.status(400).json('Error: ' + error);
   }
 });
 
@@ -40,19 +40,19 @@ router.delete('/:id', async (req, res) => {
   try {
     const userId = req.body.userId;
     const tripId = req.params.id;
-    const userObject = await User.findOne({"_id": userId});
-    if (!userObject) return res.status(404).json({"message": "User not found"});
+    const userObject = await User.findOne({ _id: userId });
+    if (!userObject) return res.status(404).json({ message: 'User not found' });
     await userObject.trips.remove(tripId);
     await userObject.save();
     Trip.findByIdAndRemove(tripId)
-      .then((result) => 
-        {
-          if (!result) return res.status(404).json({"message": "The trip with the given ID was not found"})
-          return res.json({"message": "Trip was sucessfully deleted."})
-        })
+      .then((result) => {
+        if (!result)
+          return res.status(404).json({ message: 'The trip with the given ID was not found' });
+        return res.json({ message: 'Trip was sucessfully deleted.' });
+      })
       .catch((error) => res.status(404).send('Something goes wrong', error));
   } catch (error) {
-    res.status(400).json('Error: ' + error)
+    res.status(400).json('Error: ' + error);
   }
 });
 
@@ -60,23 +60,24 @@ router.delete('/:id', async (req, res) => {
 router.put('/edit/:id', (req, res) => {
   const { error } = validateTrip(req.body);
   if (error) {
-    return res.status(400).send(error.details[0].message)
+    return res.status(400).send(error.details[0].message);
   } else {
     Trip.findById(req.params.id)
-      .then(trip => {
+      .then((trip) => {
         trip.set({
           name: req.body.name,
           description: req.body.description,
           startDate: req.body.startDate,
           isTripFinished: req.body.isTripFinished,
           budget: req.body.budget,
-          mainCurrency: req.body.mainCurrency
+          mainCurrency: req.body.mainCurrency,
         });
-        trip.save()
+        trip
+          .save()
           .then(() => res.json('Trip modified!'))
-          .catch(error => res.status(400).json(error))
+          .catch((error) => res.status(400).json(error));
       })
-      .catch(() => res.status(404).send('The trip with the given ID was not found'))
+      .catch(() => res.status(404).send('The trip with the given ID was not found'));
   }
 });
 
@@ -86,10 +87,10 @@ router.put('/edit/:id', (req, res) => {
 router.post('/:id/expenses', async (req, res) => {
   try {
     const tripFromDatabase = await Trip.findById(req.params.id);
-    const { categories : tripCategories }  = tripFromDatabase;
+    const { categories: tripCategories } = tripFromDatabase;
     const { error, value } = validateExpense(req.body, tripCategories);
     if (error) {
-      return res.status(400).json({error: error.details[0].message});
+      return res.status(400).json({ error: error.details[0].message });
     }
     tripFromDatabase.expenses.push(value);
     const changedTrip = await tripFromDatabase.save();
@@ -108,8 +109,8 @@ router.get('/:id/expenses', async (req, res) => {
     const tripFromDatabase = await Trip.findById(req.params.id);
     const expenses = tripFromDatabase.expenses;
     const expensesObject = {
-      "expenses": expenses,
-    }
+      expenses: expenses,
+    };
     res.status(200).json(expensesObject);
   } catch (error) {
     dbDebug('Sth wrong during getting all expenses:');
@@ -126,18 +127,18 @@ router.get('/:tripId/expenses/:expenseId', async (req, res) => {
     const trip = await Trip.findById(req.params.tripId);
     if (trip === null) {
       return res.status(404).json({
-        "message": "Trip not found"
-      })
+        message: 'Trip not found',
+      });
     }
     const expense = trip.expenses.id(req.params.expenseId);
     if (expense === null) {
       return res.status(404).json({
-        "message": "Expense not found"
-      })
+        message: 'Expense not found',
+      });
     }
     const expenseObject = {
-      "expense": expense,
-    }
+      expense: expense,
+    };
     res.status(200).json(expenseObject);
   } catch (error) {
     dbDebug('Sth wrong during getting chosen expense:');
@@ -154,38 +155,40 @@ router.put('/:tripId/expenses/:expenseId', async (req, res) => {
     const trip = await Trip.findById(req.params.tripId);
     if (trip === null) {
       return res.status(404).json({
-        "message": "Trip not found"
-      })
+        message: 'Trip not found',
+      });
     }
-    const { categories : tripCategories}  = trip;
+    const { categories: tripCategories } = trip;
     const { error, value } = validateExpense(req.body, tripCategories);
     if (error) {
       return res.status(400).send(error.details[0].message);
     }
 
-    const edited = await Trip.updateOne({
-      _id: req.params.tripId,
-      "expenses._id": req.params.expenseId
-    },
-    {
-      "$set": {
-        "expenses.$.cost": value.cost,
-        "expenses.$.name": value.name,
-        "expenses.$.category": value.category,
-        "expenses.$.currency": value.currency
-      }
-    });
+    const edited = await Trip.updateOne(
+      {
+        _id: req.params.tripId,
+        'expenses._id': req.params.expenseId,
+      },
+      {
+        $set: {
+          'expenses.$.cost': value.cost,
+          'expenses.$.name': value.name,
+          'expenses.$.category': value.category,
+          'expenses.$.currency': value.currency,
+        },
+      },
+    );
     if (edited.n === 0) {
       return res.status(404).json({
-        "message": "Expense not found",
-      })
+        message: 'Expense not found',
+      });
     }
     await trip.save();
     const changedTrip = await Trip.findById(req.params.tripId);
     const changedExpense = changedTrip.expenses.id(req.params.expenseId);
     res.status(200).json({
-      "message": "Expense edited correctly",
-      "data": changedExpense
+      message: 'Expense edited correctly',
+      data: changedExpense,
     });
   } catch (error) {
     console.dir(error);
@@ -201,22 +204,20 @@ router.delete('/:tripId/expenses/:expenseId', async (req, res) => {
     const trip = await Trip.findById(req.params.tripId);
     if (trip === null) {
       return res.status(404).json({
-        "message": "Trip not found"
-      })
+        message: 'Trip not found',
+      });
     }
     const deletedExpense = trip.expenses.id(req.params.expenseId).remove();
     await trip.save();
-    return res.status(200).send(
-      {
-        "message": "I deleted expense",
-        "data": deletedExpense
-      });
-
+    return res.status(200).send({
+      message: 'I deleted expense',
+      data: deletedExpense,
+    });
   } catch (error) {
     const errorMessage = error.toString();
     dbDebug(errorMessage);
     return res.status(404).json({
-      "message": errorMessage
+      message: errorMessage,
     });
   }
 });

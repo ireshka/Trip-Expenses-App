@@ -1,7 +1,6 @@
-import React from 'react'; 
+import React from 'react';
 import styled from 'styled-components';
 import { theme } from '../utils/theme';
-
 
 const FooterWrapper = styled.div`
   margin-top: auto;
@@ -22,7 +21,7 @@ const Link = styled.a`
   font-size: 12px;
   cursor: pointer;
   &:hover {
-    color:${theme.colors.btnMain};
+    color: ${theme.colors.btnMain};
   }
 `;
 
@@ -31,24 +30,18 @@ const Footer = () => {
     <FooterWrapper>
       <Paragraph>
         Trip Expenses App was created by Warsaw Group during{' '}
-        <Link
-          href="https://coderscamp.edu.pl/"
-          title="See CodersCamp Page"
-        >
+        <Link href="https://coderscamp.edu.pl/" title="See CodersCamp Page">
           Coderscamp 2019/2020
         </Link>
         . More info and source code{' '}
-        <Link
-          href="https://github.com/dobrzyckahanna/TravelPlanner"
-          title="See on Github"
-        >
+        <Link href="https://github.com/dobrzyckahanna/TravelPlanner" title="See on Github">
           here
         </Link>
         .
       </Paragraph>
       <Paragraph>©All Rights Reserved, 2020</Paragraph>
     </FooterWrapper>
-  )
+  );
 };
 
 export default Footer;

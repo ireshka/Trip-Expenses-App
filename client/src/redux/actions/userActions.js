@@ -9,24 +9,23 @@ const SET_CURRENCY_LIST = 'SET_CURRENCY_LIST';
 const SET_USER_ID = 'SET_USER_ID';
 const SET_EXCHANGE_RATES = 'SET_EXCHANGE_RATES';
 
-
 const setLoggedIn = () => ({
   type: SET_LOGGED_IN,
   payload: {
-    isLoggedIn: true
-  }
+    isLoggedIn: true,
+  },
 });
 
 const setLoggedOut = () => ({
   type: SET_LOGGED_OUT,
   payload: {
-    isLoggedIn: false
-  }
+    isLoggedIn: false,
+  },
 });
 
 const clearState = () => ({
   type: CLEAR_STATE,
-  payload: {}
+  payload: {},
 });
 
 const setChoosenTrip = (id, name, mainCurrency) => ({
@@ -35,52 +34,52 @@ const setChoosenTrip = (id, name, mainCurrency) => ({
     choosenTrip: {
       id,
       name,
-      mainCurrency
-    }
-  }
+      mainCurrency,
+    },
+  },
 });
 
 const setChoosenExpense = (id) => ({
   type: SET_CHOOSEN_EXPENSE,
   payload: {
     choosenExpense: {
-      id
-    }
-  }
+      id,
+    },
+  },
 });
 
 const updateChoosenTrip = (name, mainCurrency) => ({
   type: UPDATE_CHOOSEN_TRIP,
   payload: {
-      name,
-      mainCurrency
-  }
+    name,
+    mainCurrency,
+  },
 });
 
 const clearChoosenTrip = () => ({
   type: CLEAR_CHOOSEN_TRIP,
-  payload: {}
+  payload: {},
 });
 
 const setCurrencyList = (currencyList) => ({
   type: SET_CURRENCY_LIST,
   payload: {
     currencyList: currencyList,
-  }
+  },
 });
 
 const setUserId = (userId) => ({
   type: SET_USER_ID,
   payload: {
     userId: userId,
-  }
+  },
 });
 
 const setExchangeRates = (exchangeRates) => ({
   type: SET_EXCHANGE_RATES,
   payload: {
-    exchangeRates
-  }
+    exchangeRates,
+  },
 });
 
 export {
@@ -103,5 +102,5 @@ export {
   CLEAR_CHOOSEN_TRIP,
   SET_CURRENCY_LIST,
   SET_USER_ID,
-  SET_EXCHANGE_RATES
-}
+  SET_EXCHANGE_RATES,
+};

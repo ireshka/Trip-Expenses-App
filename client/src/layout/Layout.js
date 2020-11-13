@@ -1,6 +1,6 @@
 import React from 'react';
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faWallet, faDollarSign, faArrowLeft } from '@fortawesome/free-solid-svg-icons'
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faWallet, faDollarSign, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
 import { theme } from '../utils/theme';
 
@@ -35,26 +35,23 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const StyledWrapper = styled.div`
-  min-height:100vh;
+  min-height: 100vh;
   min-width: 300px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-image: 
-    linear-gradient(${theme.colors.bgOverlay}, ${theme.colors.bgOverlay}),
-    url("/images/bg-1.jpg");
+  background-image: linear-gradient(${theme.colors.bgOverlay}, ${theme.colors.bgOverlay}),
+    url('/images/bg-1.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
 `;
 
-const Layout = ({children}) => (
+const Layout = ({ children }) => (
   <ThemeProvider theme={theme}>
     <>
       <GlobalStyle />
-      <StyledWrapper>
-        {children}
-      </StyledWrapper>
+      <StyledWrapper>{children}</StyledWrapper>
     </>
   </ThemeProvider>
 );
