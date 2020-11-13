@@ -1,6 +1,6 @@
 require('dotenv').config();
 const mongoose = require('mongoose');
-const Joi = require('@hapi/joi');
+const Joi = require('joi');
 const jwt = require('jsonwebtoken');
 const config = require('config');
 
