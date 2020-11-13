@@ -1,6 +1,7 @@
 export const colors = {
   trip: '#0191C8',
   btnMain: '#2EC66D',
+  btnMainLight: '#54d288',
   attencion: '#DC3545',
   errorMsgText: '#721C24',
   errorMsgBg: 'rgba(220, 53, 69, .15)',
