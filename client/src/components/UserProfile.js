@@ -55,8 +55,7 @@ class UserProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
-      email: '',
+      username: '',
     };
   }
 
@@ -70,8 +69,7 @@ class UserProfile extends Component {
       .get(`/api/users/${this.props.userId}`, { headers: { 'x-auth-token': `${getToken()}` } })
       .then((res) => {
         this.setState({
-          name: res.data.name,
-          email: res.data.email,
+          username: res.data.username,
         });
       })
       .catch((err) => console.log(err));
@@ -85,11 +83,7 @@ class UserProfile extends Component {
             <SectionTitle>Your Profile Information</SectionTitle>
             <DataGroup>
               <LabelData>User Name:</LabelData>
-              <DisabledText>{this.state.name}</DisabledText>
-            </DataGroup>
-            <DataGroup>
-              <LabelData>Email:</LabelData>
-              <DisabledText>{this.state.email}</DisabledText>
+              <DisabledText>{this.state.username}</DisabledText>
             </DataGroup>
           </Section>
           <Section>

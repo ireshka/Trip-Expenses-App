@@ -9,8 +9,7 @@ class Signup extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
-      email: '',
+      username: '',
       password: '',
       error: '',
     };
@@ -19,18 +18,17 @@ class Signup extends React.Component {
   onFormSubmit = async (e) => {
     e.preventDefault();
     const user = {
-      name: this.state.name,
-      email: this.state.email,
+      username: this.state.username,
       password: this.state.password,
     };
     const url = '/api/users/';
     await axios
       .post(url, user)
       .then((res) => {
-        const userName = res.data.name;
-        return userName;
+        const username = res.data.username;
+        return username;
       })
-      .then((userName) => alert(`Hello ${userName}. You've successfully register. Log in now`))
+      .then((username) => alert(`Hello ${username}. You've successfully register. Log in now`))
       .then(() => this.props.history.push('/users/login'))
       .catch((err) => {
         if (err.response.data) {
@@ -53,19 +51,19 @@ class Signup extends React.Component {
         <Form onSubmit={this.onFormSubmit}>
           <ErrorMessage error={this.state.error}></ErrorMessage>
 
-          <Label htmlFor="signup-name">Name:</Label>
+          <Label htmlFor="signup-name">User Name:</Label>
           <ParagraphSmallItalic>Username should be 4-20 characters long</ParagraphSmallItalic>
           <Input
             type="text"
-            name="name"
+            name="username"
             id="signup-name"
             placeholder="Name"
             required
-            onChange={this.onInputChange.bind(this, 'name')}
-            value={this.state.name}
+            onChange={this.onInputChange.bind(this, 'username')}
+            value={this.state.username}
           />
 
-          <Label htmlFor="signup-email">Email:</Label>
+          {/* <Label htmlFor="signup-email">Email:</Label>
           <Input
             type="email"
             name="email"
@@ -75,7 +73,7 @@ class Signup extends React.Component {
             novalidate
             onChange={this.onInputChange.bind(this, 'email')}
             value={this.state.email}
-          />
+          /> */}
 
           <Label htmlFor="signup-password">Password:</Label>
           <ParagraphSmallItalic>
