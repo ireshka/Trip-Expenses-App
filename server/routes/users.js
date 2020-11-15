@@ -8,7 +8,7 @@ const { checkAuthenticated } = require('../middleware/auth');
 // User GET route
 router.get('/:id', checkAuthenticated, async (req, res) => {
   try {
-    const user = await User.findById(req.params.id).select('name email trips');
+    const user = await User.findById(req.params.id).select('username trips');
     res.json(user);
   } catch (error) {
     res.status(400).json('Error: ' + error);
@@ -33,15 +33,18 @@ router.get('/:id/trips', checkAuthenticated, async (req, res) => {
 
 // User login
 router.post('/login', async (req, res) => {
+  // Todo: better destructuring
   const { error } = validateUserOnLogin(req.body);
+  // Todo: correct error handling - development/production
   if (error) return res.status(400).json({ error: error.details[0].message });
 
-  var user = await User.findOne({ email: req.body.email });
-  if (!user) return res.status(400).json({ error: 'Invalid email or password' });
+  var user = await User.findOne({ username: req.body.username });
+  // Todo: change here - there is propably user name only error
+  if (!user) return res.status(400).json({ error: `We didn't find user with given username` });
 
   try {
     const validPassword = await bcrypt.compare(req.body.password, user.password);
-    if (!validPassword) return res.status(400).json({ error: 'Invalid email or password' });
+    if (!validPassword) return res.status(400).json({ error: `Invalid password` });
   } catch (err) {
     res.status(400).json('Error: ' + error);
   }
@@ -51,28 +54,43 @@ router.post('/login', async (req, res) => {
 });
 
 // Register new user
+// it return error object with message, type, key & value keys
+router.post('/', async (req, res, next) => {
+  try {
+    const { error } = validateUser(req.body);
 
-router.post('/', async (req, res) => {
-  const { error } = validateUser(req.body);
+    if (error) {
+      const { details } = error;
+      console.log(details);
+      const arrayOfErrors = details.map(({ message, type, context }) => {
+        const { key, value } = context;
+        return {
+          message,
+          type,
+          key,
+          value,
+        };
+      });
+      return res.status(400).json({ errorList: arrayOfErrors });
+    }
 
-  if (error) {
-    return res.status(400).json({ error: error.details[0].message });
+    let user = await User.findOne({
+      username: req.body.username,
+    });
+
+    if (user) {
+      return res.status(400).json({ error: 'User already registered' });
+    }
+
+    let newUser = new User(_.pick(req.body, ['username', 'password']));
+    const salt = await bcrypt.genSalt(10);
+    newUser.password = await bcrypt.hash(newUser.password, salt);
+
+    await newUser.save();
+    res.json(_.pick(newUser, ['_id', 'name']));
+  } catch (err) {
+    next(err);
   }
-
-  let user = await User.findOne({
-    email: req.body.email,
-  });
-
-  if (user) {
-    return res.status(400).json({ error: 'User already registered' });
-  }
-
-  let newUser = new User(_.pick(req.body, ['name', 'email', 'password']));
-  const salt = await bcrypt.genSalt(10);
-  newUser.password = await bcrypt.hash(newUser.password, salt);
-
-  await newUser.save();
-  res.json(_.pick(newUser, ['_id', 'name', 'email']));
 });
 
 module.exports = router;

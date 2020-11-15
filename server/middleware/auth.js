@@ -14,8 +14,4 @@ const checkAuthenticated = (req, res, next) => {
   }
 };
 
-// export const checkAuthorized = async (req, res, next) => {
-
-// }
-
 module.exports = { checkAuthenticated };
