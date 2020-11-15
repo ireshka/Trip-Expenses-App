@@ -12,8 +12,19 @@ const ErrorDiv = styled.div`
   border-radius: ${theme.radius.sm};
 `;
 
-const ErrorMessage = (props) => {
-  return <>{props.error && <ErrorDiv>{props.error}</ErrorDiv>}</>;
+const ErrorMessage = ({ error }) => {
+  if (error && (error.length === 1) | (typeof error === 'string')) {
+    const [oneError] = error;
+    return <ErrorDiv>{oneError}</ErrorDiv>;
+  } else if (error && error.length > 1) {
+    const errorElements = error.map((error) => <li>{error}</li>);
+    return (
+      <ErrorDiv>
+        <ul>{errorElements}</ul>
+      </ErrorDiv>
+    );
+  }
+  return <></>;
 };
 
 export default ErrorMessage;

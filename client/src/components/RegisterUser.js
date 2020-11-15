@@ -14,8 +14,28 @@ class Signup extends React.Component {
       error: '',
     };
   }
+  // hook candidate
+  createErrorList = (errorList) => {
+    errorList.forEach((errorElement) => {
+      const { key, message } = errorElement;
+      const errorState = { ...this.state.error };
+      if (!errorState[key]) {
+        errorState[key] = [];
+        errorState[key].push(message);
+      } else {
+        errorState[key].push(message);
+      }
+      this.setState({ error: errorState });
+    });
+  };
 
-  onFormSubmit = async (e) => {
+  createGeneralError = () => {
+    const errorState = { ...this.state.error };
+    errorState['general'] = ['Error occured, try later'];
+    this.setState({ error: errorState });
+  };
+
+  handleFormSubmit = async (e) => {
     e.preventDefault();
     const user = {
       username: this.state.username,
@@ -25,31 +45,40 @@ class Signup extends React.Component {
     await axios
       .post(url, user)
       .then((res) => {
+        console.log(res.data);
         const username = res.data.username;
         return username;
       })
       .then((username) => alert(`Hello ${username}. You've successfully register. Log in now`))
       .then(() => this.props.history.push('/users/login'))
       .catch((err) => {
-        if (err.response.data) {
-          this.setState({ error: err.response.data.error });
+        this.setState({ error: '' });
+        const { errorList } = err.response.data;
+        console.dir(errorList);
+        if (errorList) {
+          this.createErrorList(errorList);
         } else {
-          this.setState({ error: 'Something went wrong' });
+          this.createGeneralError();
         }
       });
   };
 
-  onInputChange = (inputName, e) => {
+  handleInputChange = (inputName, e) => {
     this.setState({
       [inputName]: e.target.value,
     });
   };
 
   render() {
+    const {
+      username: errorUser,
+      password: errorPassword,
+      general: errorGeneral,
+    } = this.state.error;
     return (
       <ContentWrapper title="Sign Up">
-        <Form onSubmit={this.onFormSubmit}>
-          <ErrorMessage error={this.state.error}></ErrorMessage>
+        <Form onSubmit={this.handleFormSubmit}>
+          <ErrorMessage error={errorGeneral}></ErrorMessage>
 
           <Label htmlFor="signup-name">User Name:</Label>
           <ParagraphSmallItalic>Username should be 4-20 characters long</ParagraphSmallItalic>
@@ -59,21 +88,10 @@ class Signup extends React.Component {
             id="signup-name"
             placeholder="Name"
             required
-            onChange={this.onInputChange.bind(this, 'username')}
+            onChange={this.handleInputChange.bind(this, 'username')}
             value={this.state.username}
           />
-
-          {/* <Label htmlFor="signup-email">Email:</Label>
-          <Input
-            type="email"
-            name="email"
-            id="signup-email"
-            placeholder="Email"
-            required
-            novalidate
-            onChange={this.onInputChange.bind(this, 'email')}
-            value={this.state.email}
-          /> */}
+          <ErrorMessage error={errorUser}></ErrorMessage>
 
           <Label htmlFor="signup-password">Password:</Label>
           <ParagraphSmallItalic>
@@ -86,9 +104,10 @@ class Signup extends React.Component {
             id="signup-password"
             placeholder="Password"
             required
-            onChange={this.onInputChange.bind(this, 'password')}
+            onChange={this.handleInputChange.bind(this, 'password')}
             value={this.state.password}
           />
+          <ErrorMessage error={errorPassword}></ErrorMessage>
 
           <Button textOnButton="Sign Up" textColor="#fff" btnColor="#2EC66D" btnBorder="none" />
         </Form>
