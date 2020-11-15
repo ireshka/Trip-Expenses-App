@@ -79,7 +79,10 @@ router.post('/', async (req, res, next) => {
     });
 
     if (user) {
-      return res.status(400).json({ error: 'User already registered' });
+      // create errorCreator for post
+      return res
+        .status(400)
+        .json({ errorList: [{ message: 'User already registered', key: 'username' }] });
     }
 
     let newUser = new User(_.pick(req.body, ['username', 'password']));
@@ -87,7 +90,7 @@ router.post('/', async (req, res, next) => {
     newUser.password = await bcrypt.hash(newUser.password, salt);
 
     await newUser.save();
-    res.json(_.pick(newUser, ['_id', 'name']));
+    res.json(_.pick(newUser, ['_id', 'username']));
   } catch (err) {
     next(err);
   }
