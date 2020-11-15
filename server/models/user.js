@@ -54,44 +54,45 @@ userSchema.methods.generateAuthToken = function () {
 // Compile schema to a model
 const User = mongoose.model('User', userSchema);
 
+const userGeneralSchema = Joi.object({
+  // add regexp later
+  username: Joi.string().min(4).max(20).messages({
+    'any.required': `"username" is a required field`,
+    'string.min': `"username" should have minimum length of 4 chars`,
+    'string.max': `"username" should have maximal length of 20 chars`,
+  }),
+  password: Joi.string()
+    .min(8)
+    .max(24)
+    .regex(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#\$%\^&]).{8,1024}$/)
+    .messages({
+      'any.required': `"password" is a required field`,
+      'string.min': `"password" should have minimum length of 8 chars`,
+      'string.max': `"password" should have maximum length of 24 chars`,
+      'string.pattern.base': `"password" should contain at least one capital, letter, one number, one small letter and one special sign from accepted: ?=.*[!@%#$^&`,
+    }), // regex for number/lowercase/capital/special !@#$%^&
+}).min(1);
+
+const createUserSchema = userGeneralSchema.options({ presence: 'required' });
+
 // Function will return object with value key and error key (if there is an error)
 function validateUser(user) {
-  const userSchema = Joi.object({
-    // add regexp later
-    username: Joi.string().min(4).max(20).required().messages({
-      'any.required': `"username" is a required field`,
-      'string.min': `"username" should have minimum length of 4 chars`,
-      'string.max': `"username" should have maximal length of 20 chars`,
-    }),
-    password: Joi.string()
-      .min(8)
-      .max(24)
-      .required()
-      .regex(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#\$%\^&]).{8,1024}$/)
-      .messages({
-        'any.required': `"password" is a required field`,
-        'string.min': `"password" should have minimum length of 8 chars`,
-        'string.max': `"password" should have maximum length of 24 chars`,
-        'string.pattern.base': `"password" should contain at least one capital, letter, one number, one small letter and one special sign from accepted: ?=.*[!@%#$^&`,
-      }), // regex for number/lowercase/capital/special !@#$%^&
+  return createUserSchema.validate(user, {
+    abortEarly: false,
   });
-  return userSchema.validate(user, {
+}
+
+function validateUserOptional(user) {
+  return userGeneralSchema.validate(user, {
     abortEarly: false,
   });
 }
 
 // User validation for authorization process
 // Function will return object with value key and error key (if there is an error)
-function validateUserOnLogin(user) {
-  const userSchema = Joi.object({
-    username: Joi.string().min(8).max(200).required(),
-    password: Joi.string().required(),
-  });
-  return userSchema.validate(user, {
-    abortEarly: false,
-  });
-}
 
-exports.User = User;
-exports.validateUser = validateUser;
-exports.validateUserOnLogin = validateUserOnLogin;
+module.exports = {
+  User,
+  validateUser,
+  validateUserOptional,
+};
