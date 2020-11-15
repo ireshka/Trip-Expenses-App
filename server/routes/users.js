@@ -2,7 +2,7 @@ const _ = require('lodash');
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const router = express.Router();
-const { User, validateUser, validateUserOnLogin } = require('../models/user');
+const { User, validateUser, validateUserOptional } = require('../models/user');
 const { checkAuthenticated } = require('../middleware/auth');
 
 // User GET route
@@ -34,17 +34,25 @@ router.get('/:id/trips', checkAuthenticated, async (req, res) => {
 // User login
 router.post('/login', async (req, res) => {
   // Todo: better destructuring
-  const { error } = validateUserOnLogin(req.body);
+  const { username, password } = req.body;
+  const { error } = validateUserOptional({ username });
   // Todo: correct error handling - development/production
-  if (error) return res.status(400).json({ error: error.details[0].message });
+  if (error)
+    return res.status(400).json({
+      errorList: [{ message: `We didn't find user with given username`, key: 'username' }],
+    });
 
-  var user = await User.findOne({ username: req.body.username });
+  const user = await User.findOne({ username });
   // Todo: change here - there is propably user name only error
-  if (!user) return res.status(400).json({ error: `We didn't find user with given username` });
+  if (!user)
+    return res.status(400).json({
+      errorList: [{ message: `We didn't find user with given username`, key: 'username' }],
+    });
 
   try {
-    const validPassword = await bcrypt.compare(req.body.password, user.password);
-    if (!validPassword) return res.status(400).json({ error: `Invalid password` });
+    const validPassword = await bcrypt.compare(password, user.password);
+    if (!validPassword)
+      return res.status(400).json({ errorList: [{ message: `Wrong password`, key: 'password' }] });
   } catch (err) {
     res.status(400).json('Error: ' + error);
   }

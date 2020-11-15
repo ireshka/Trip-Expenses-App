@@ -42,6 +42,7 @@ class Signup extends React.Component {
       password: this.state.password,
     };
     const url = '/api/users/';
+    this.setState({ error: '' });
     await axios
       .post(url, user)
       .then((res) => {
@@ -52,7 +53,6 @@ class Signup extends React.Component {
       .then((username) => alert(`Hello ${username}. You've successfully register. Log in now`))
       .then(() => this.props.history.push('/users/login'))
       .catch((err) => {
-        this.setState({ error: '' });
         const { errorList } = err.response.data;
         console.dir(errorList);
         if (errorList) {

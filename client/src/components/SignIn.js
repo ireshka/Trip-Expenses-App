@@ -18,13 +18,35 @@ class Login extends React.Component {
     };
   }
 
-  onFormSubmit = async (e) => {
+  // hook candidate
+  createErrorList = (errorList) => {
+    errorList.forEach((errorElement) => {
+      const { key, message } = errorElement;
+      const errorState = { ...this.state.error };
+      if (!errorState[key]) {
+        errorState[key] = [];
+        errorState[key].push(message);
+      } else {
+        errorState[key].push(message);
+      }
+      this.setState({ error: errorState });
+    });
+  };
+
+  createGeneralError = () => {
+    const errorState = { ...this.state.error };
+    errorState['general'] = ['Error occured, try later'];
+    this.setState({ error: errorState });
+  };
+
+  handleFormSubmit = async (e) => {
     e.preventDefault();
     const user = {
       username: this.state.username,
       password: this.state.password,
     };
     const url = '/api/users/login';
+    this.setState({ error: '' });
     await axios
       .post(url, user)
       .then((res) => {
@@ -37,26 +59,33 @@ class Login extends React.Component {
       .then((list) => this.props.setCurrencyList(list))
       .then(() => this.props.history.push('/trips/all'))
       .catch((err) => {
-        if (err.response.data) {
-          this.setState({ error: err.response.data.error });
+        const { errorList } = err.response.data;
+        console.dir(errorList);
+        if (errorList) {
+          this.createErrorList(errorList);
         } else {
-          this.setState({ error: 'Something went wrong' });
+          this.createGeneralError();
         }
       });
   };
 
-  onInputChange = (inputName, e) => {
+  handleInputChange = (inputName, e) => {
     this.setState({
       [inputName]: e.target.value,
     });
   };
 
   render() {
+    const {
+      username: errorUser,
+      password: errorPassword,
+      general: errorGeneral,
+    } = this.state.error;
     return (
       <ContentWrapper title="Login">
-        <ErrorMessage error={this.state.error}></ErrorMessage>
+        <ErrorMessage error={errorGeneral}></ErrorMessage>
 
-        <Form onSubmit={this.onFormSubmit}>
+        <Form onSubmit={this.handleFormSubmit}>
           <Label htmlFor="login-username">User name:</Label>
           <Input
             type="text"
@@ -65,9 +94,10 @@ class Login extends React.Component {
             placeholder="User name"
             required
             // Todo: ??? rewrite without bind
-            onChange={this.onInputChange.bind(this, 'username')}
+            onChange={this.handleInputChange.bind(this, 'username')}
             value={this.state.username}
           />
+          <ErrorMessage error={errorUser}></ErrorMessage>
 
           <Label htmlFor="login-password">Password:</Label>
           <Input
@@ -76,9 +106,10 @@ class Login extends React.Component {
             id="login-password"
             placeholder="Password"
             required
-            onChange={this.onInputChange.bind(this, 'password')}
+            onChange={this.handleInputChange.bind(this, 'password')}
             value={this.state.password}
           />
+          <ErrorMessage error={errorPassword}></ErrorMessage>
 
           <Button textOnButton="Login" textColor="#fff" btnColor="#2EC66D" btnBorder="none" />
         </Form>
