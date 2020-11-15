@@ -6,24 +6,27 @@ const config = require('config');
 
 // Create schema
 const userSchema = new mongoose.Schema({
-  name: {
+  username: {
+    // todo: Restrict later to alphanumeric
     type: String,
-    required: [true, 'Username is required'],
-    minlength: [4, 'Username must be at least 4 characters long'],
-    maxlength: [20, 'Username must be at most 20 characters long'],
-  },
-  email: {
-    type: String,
-    required: [true, 'Email is required'],
-    unique: true,
-    match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Not a valid email address'],
-    lowercase: true,
+    required: true,
+    minlength: 4,
+    maxlength: 20,
     trim: true,
+    unique: true,
   },
+  // email: {
+  //   type: String,
+  //   required: [true, 'Email is required'],
+  //   unique: true,
+  //   match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Not a valid email address'],
+  //   lowercase: true,
+  //   trim: true,
+  // },
   password: {
     type: String,
-    required: [true, 'Password is required'],
-    minlength: [8, 'Password must be at least 8 characters long'],
+    required: true,
+    minlength: 8,
     maxlength: 500,
     trim: true,
   },
@@ -41,7 +44,7 @@ userSchema.methods.generateAuthToken = function () {
   const token = jwt.sign(
     {
       _id: this._id,
-      name: this.name,
+      username: this.username,
     },
     process.env.JWT_PRIVATEKEY,
   );
@@ -54,25 +57,39 @@ const User = mongoose.model('User', userSchema);
 // Function will return object with value key and error key (if there is an error)
 function validateUser(user) {
   const userSchema = Joi.object({
-    name: Joi.string().min(4).max(20).required(),
-    email: Joi.string().min(8).max(200).required().email(),
+    // add regexp later
+    username: Joi.string().min(4).max(20).required().messages({
+      'any.required': `"username" is a required field`,
+      'string.min': `"username" should have minimum length of 4 chars`,
+      'string.max': `"username" should have maximal length of 20 chars`,
+    }),
     password: Joi.string()
       .min(8)
       .max(24)
       .required()
-      .regex(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#\$%\^&]).{8,1024}$/), // regex for number/lowercase/capital/special !@#$%^&
+      .regex(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#\$%\^&]).{8,1024}$/)
+      .messages({
+        'any.required': `"password" is a required field`,
+        'string.min': `"password" should have minimum length of 8 chars`,
+        'string.max': `"password" should have maximum length of 24 chars`,
+        'string.pattern.base': `"password" should contain at least one capital, letter, one number, one small letter and one special sign from accepted: ?=.*[!@%#$^&`,
+      }), // regex for number/lowercase/capital/special !@#$%^&
   });
-  return userSchema.validate(user);
+  return userSchema.validate(user, {
+    abortEarly: false,
+  });
 }
 
 // User validation for authorization process
 // Function will return object with value key and error key (if there is an error)
 function validateUserOnLogin(user) {
   const userSchema = Joi.object({
-    email: Joi.string().min(8).max(200).required().email(),
+    username: Joi.string().min(8).max(200).required(),
     password: Joi.string().required(),
   });
-  return userSchema.validate(user);
+  return userSchema.validate(user, {
+    abortEarly: false,
+  });
 }
 
 exports.User = User;

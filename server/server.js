@@ -2,6 +2,7 @@ require('dotenv').config();
 const config = require('config');
 
 const serverDebug = require('debug')('server:startup');
+const errorDebug = require('debug')('server:error');
 const dbDebug = require('debug')('server:database');
 const morgan = require('morgan');
 
@@ -51,6 +52,13 @@ app.use('/api/currencies', currencyRouter);
 
 // Development - serve static from public
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Error handling
+app.use(function (err, req, res, next) {
+  errorDebug(err);
+  console.dir(err);
+  res.status(500).json({ errorMessage: 'From backend something goes very wrong ' });
+});
 
 // Production - serve static from build
 if (process.env.NODE_ENV === 'production') {
