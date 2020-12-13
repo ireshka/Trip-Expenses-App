@@ -69,7 +69,7 @@ const userGeneralSchema = Joi.object({
       'any.required': `"password" is a required field`,
       'string.min': `"password" should have minimum length of 8 chars`,
       'string.max': `"password" should have maximum length of 24 chars`,
-      'string.pattern.base': `"password" should contain at least one capital, letter, one number, one small letter and one special sign from accepted: ?=.*[!@%#$^&`,
+      'string.pattern.base': `"password" should contain at least one capital, letter, one number, one small letter and one special sign from accepted: !@#\$%\^&`,
     }), // regex for number/lowercase/capital/special !@#$%^&
 }).min(1);
 
