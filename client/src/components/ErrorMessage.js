@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { theme } from '../utils/theme';
 
-const ErrorDiv = styled.div`
+const ErrorBox = styled.div`
   padding: 8px;
   margin: 0 0 20px 0;
   font-size: 14px;
@@ -12,16 +12,20 @@ const ErrorDiv = styled.div`
   border-radius: ${theme.radius.sm};
 `;
 
+const ErrorList = styled.ul`
+  list-style-position: inside;
+`;
+
 const ErrorMessage = ({ error }) => {
   if (error && (error.length === 1) | (typeof error === 'string')) {
     const [oneError] = error;
-    return <ErrorDiv>{oneError}</ErrorDiv>;
+    return <ErrorBox>{oneError}</ErrorBox>;
   } else if (error && error.length > 1) {
     const errorElements = error.map((error) => <li>{error}</li>);
     return (
-      <ErrorDiv>
-        <ul>{errorElements}</ul>
-      </ErrorDiv>
+      <ErrorBox>
+        <ErrorList>{errorElements}</ErrorList>
+      </ErrorBox>
     );
   }
   return <></>;
