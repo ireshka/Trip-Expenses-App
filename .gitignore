@@ -25,7 +25,7 @@ jspm_packages/
 
 # Cache
 .npm/
-.eslintcache/
+.eslintcache
 .cache/
 .parcel-cache/
 
