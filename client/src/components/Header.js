@@ -1,45 +1,44 @@
+import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { connect } from 'react-redux';
-import { theme } from '../utils/theme';
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 import LogoImg from '../images/logo.png';
-import { setLoggedOut, clearState } from '../redux/actions/userActions';
+import { clearState, setLoggedOut } from '../redux/actions/userActions';
+import { theme } from '../utils/theme';
 
 const HeaderWrapper = styled.div`
+  align-items: center;
   background-color: ${theme.colors.whiteOverlay};
-  width: 100%;
+  box-shadow: 0px 4px 4px ${theme.colors.bgOverlay};
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: space-between;
-  box-shadow: 0px 4px 4px ${theme.colors.bgOverlay};
+  width: 100%;
   ${theme.media.tablet} {
     flex-direction: row;
   }
 `;
 
 const TopLabel = styled.div`
-  width: 100%;
+  align-items: center;
+  box-shadow: 0px 0px 4px ${theme.colors.bgOverlay};
   display: flex;
   flex-direction: row;
-  align-items: center;
   justify-content: space-between;
   padding: 15px 25px;
-  box-shadow: 0px 0px 4px ${theme.colors.bgOverlay};
+  width: 100%;
   ${theme.media.tablet} {
     box-shadow: none;
   }
 `;
 
 const LogoLink = styled(Link)`
+  align-items: center;
   display: flex;
   flex-direction: row;
-  align-items: center;
   justify-content: center;
   text-decoration: none;
 `;
@@ -50,19 +49,19 @@ const Logo = styled.img`
 `;
 
 const H1 = styled.h1`
-  font-size: 24px;
-  font-family: ${theme.fonts.special};
-  font-weight: normal;
   color: ${theme.colors.neutralDark};
+  font-family: ${theme.fonts.special};
+  font-size: 24px;
+  font-weight: normal;
   margin: 0;
 `;
 
 const Button = styled.button`
-  color: ${theme.colors.neutralMidLight};
-  font-size: 16px;
   background-color: transparent;
   border: none;
+  color: ${theme.colors.neutralMidLight};
   cursor: pointer;
+  font-size: 16px;
   &:focus {
     outline: none;
   }
@@ -83,12 +82,12 @@ const Nav = styled.nav`
 `;
 
 const Ul = styled.ul`
-  width: 100%;
+  align-items: center;
   display: flex;
   flex-direction: row;
-  align-items: center;
   margin: 0;
   padding: 15px 25px;
+  width: 100%;
 `;
 
 const NavForNotLoggedIn = styled(Ul)`
@@ -97,8 +96,8 @@ const NavForNotLoggedIn = styled(Ul)`
 `;
 
 const NavForLoggedIn = styled(Ul)`
-  justify-content: space-between;
   display: ${(props) => (props.showMenu ? 'flex' : 'none')};
+  justify-content: space-between;
   ${theme.media.tablet} {
     justify-content: flex-end;
   }
@@ -110,11 +109,11 @@ const Li = styled.li`
 `;
 
 const StyledLink = styled(Link)`
-  text-decoration: none;
-  color: ${theme.colors.neutralDark};
-  font-size: 16px;
   color: ${(props) =>
     props.active === 'true' ? theme.colors.neutralDark : theme.colors.neutralMidLight};
+  color: ${theme.colors.neutralDark};
+  font-size: 16px;
+  text-decoration: none;
   &:hover {
     color: ${theme.colors.btnMain};
   }

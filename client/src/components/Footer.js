@@ -1,14 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
-import { theme } from '../utils/theme';
+
 import { focusStyle } from '../utils/mixins';
+import { theme } from '../utils/theme';
 
 const FooterWrapper = styled.div`
-  margin-top: auto;
   background-color: ${theme.colors.dark};
+  margin-top: auto;
   padding: 10px 20px;
-  width: 100%;
   text-align: center;
+  width: 100%;
 `;
 
 const Paragraph = styled.p`

@@ -1,6 +1,7 @@
 import React from 'react';
-import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+
 import { theme } from '../utils/theme';
 
 export const H2 = styled.h2`
@@ -19,18 +20,18 @@ export const H4 = styled.h2`
 export const ParagraphAlignedCenter = styled.p`
   font-size: 16px;
   font-weight: 400;
-  text-align: center;
   margin: 0 auto 10px;
+  text-align: center;
 `;
 
 const TripNameHeaderWrapper = styled.div`
-  display: flex;
-  width: 100%;
   align-items: center;
-  justify-content: center;
   background-color: ${theme.colors.trip};
   color: ${theme.colors.white};
+  display: flex;
   height: 60px;
+  justify-content: center;
+  width: 100%;
 `;
 export const TripHeader = (prop) => {
   return (
@@ -41,37 +42,39 @@ export const TripHeader = (prop) => {
 };
 
 export const InfoWrapper = styled.div`
+  align-items: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  min-height: 70px;
   margin-bottom: 20px;
+  min-height: 70px;
 `;
 
 export const InnerContainer = styled.div`
-  width: 90%;
   margin: 0 auto;
   margin-bottom: 10px;
+  width: 90%;
 `;
 
 export const LinkButtonBig = styled(Link)`
   /*  You can adapt the button adding color prop. Colors prop should be one of: green, greenOutline, grey, greyOutline, disabled */
-  display: block;
-  width: 100%;
-  min-height: 40px;
-  margin: 0 auto 20px;
-  padding: 6.5px;
-  font-size: 20px;
-  font-weight: 400;
-  text-decoration: none;
-  text-align: center;
   background-color: ${(props) =>
     props.color === 'green'
       ? theme.colors.btnMain
       : props.color === 'grey'
       ? theme.colors.neutralExtraLight
       : theme.colors.white};
+  border: 1px solid
+    ${(props) =>
+      props.color === 'green' || props.color === 'greenOutline'
+        ? theme.colors.btnMain
+        : props.color === 'grey'
+        ? theme.colors.neutralLight
+        : props.color === 'disabled'
+        ? theme.colors.neutralMidLight
+        : theme.colors.neutralMidDark};
+  border-radius: 5px;
+  box-shadow: 0 0 4px ${theme.colors.neutralLight};
   color: ${(props) =>
     props.color === 'green'
       ? theme.colors.white
@@ -84,19 +87,17 @@ export const LinkButtonBig = styled(Link)`
       : props.color === 'disabled'
       ? theme.colors.neutralMidLight
       : theme.colors.neutralMidDark};
-  border: 1px solid
-    ${(props) =>
-      props.color === 'green' || props.color === 'greenOutline'
-        ? theme.colors.btnMain
-        : props.color === 'grey'
-        ? theme.colors.neutralLight
-        : props.color === 'disabled'
-        ? theme.colors.neutralMidLight
-        : theme.colors.neutralMidDark};
-  border-radius: 5px;
-  box-shadow: 0 0 4px ${theme.colors.neutralLight};
   cursor: pointer;
+  display: block;
+  font-size: 20px;
+  font-weight: 400;
+  margin: 0 auto 20px;
+  min-height: 40px;
+  padding: 6.5px;
+  text-align: center;
+  text-decoration: none;
   transition: 0.3s;
+  width: 100%;
 
   &:hover {
     background-color: ${(props) => props.green && '#15AD54'};
@@ -110,14 +111,14 @@ export const LinkButtonBig = styled(Link)`
 
 export const LinkButtonSmall = styled(LinkButtonBig)`
   /* You can adapt the button adding color prop. See LinkButtonBig */
+  font-size: 16px;
   min-height: 30px;
   padding: 0px;
-  font-size: 16px;
 `;
 
 export const LinkText = styled(Link)`
-  font-size: 16px;
   color: #767676;
+  font-size: 16px;
   margin-bottom: 10px;
   text-decoration: none;
   &:visited {
@@ -130,10 +131,10 @@ export const LinkText = styled(Link)`
 `;
 
 export const NavLinksContainer = styled.div`
+  align-items: flex-start;
   display: flex;
   flex-direction: column;
   margin: 10px 0;
-  align-items: flex-start;
 `;
 
 // Formatted helpers
@@ -146,38 +147,38 @@ export const Ul = styled.ul`
 // Forms
 
 export const Form = styled.form`
-  width: 100%;
+  align-items: left;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: left;
   margin: 0px auto;
+  width: 100%;
 `;
 
 export const Label = styled.label`
   font-size: 16px;
-  width: 100%;
   margin: 0 auto;
   margin-bottom: 5px;
+  width: 100%;
 `;
 
 export const Input = styled.input`
-  display: inline-block;
-  width: 100%;
-  margin: 0 auto 20px;
-  padding: 5px;
-  font-size: 16px;
-  color: ${theme.colors.neutralDark};
   border: 1px solid ${theme.colors.neutralExtraLight};
   border-radius: 5px;
   box-shadow: 0 0 4px ${theme.colors.neutralExtraLight};
+  color: ${theme.colors.neutralDark};
+  display: inline-block;
+  font-size: 16px;
+  margin: 0 auto 20px;
+  padding: 5px;
+  width: 100%;
   &::placeholder {
-    font-size: 16px;
     color: #999;
+    font-size: 16px;
   }
   &:focus {
-    outline: none;
     box-shadow: 0 0 4px ${theme.colors.neutralMidLight};
+    outline: none;
   }
 `;
 
@@ -186,9 +187,9 @@ export const InputCheckbox = styled.input`
 `;
 
 export const DateInput = styled(Input)`
-  width: 110px;
   margin: 0;
   text-align: center;
+  width: 110px;
 `;
 
 export const InputContainer = styled.div`
@@ -198,31 +199,31 @@ export const InputContainer = styled.div`
 `;
 
 export const ParagraphSmallItalic = styled.p`
+  color: ${theme.colors.neutralMidDark};
+  font-size: 14px;
   font-style: italic;
   font-weight: 300;
-  font-size: 14px;
-  color: ${theme.colors.neutralMidDark};
-  padding: 0;
   margin: 3px 0;
+  padding: 0;
 `;
 
 export const Textarea = styled.textarea`
+  border: 1px solid ${theme.colors.neutralLight};
+  border-radius: 5px;
+  color: ${theme.colors.neutralDark};
   display: block;
   font-family: ${theme.fonts.default};
-  font-weight: 400;
   font-size: 16px;
-  color: ${theme.colors.neutralDark};
-  width: 100%;
+  font-weight: 400;
   height: 100px;
   margin-bottom: 20px;
   padding: 5px;
   resize: vertical;
-  border: 1px solid ${theme.colors.neutralLight};
-  border-radius: 5px;
+  width: 100%;
   &::placeholder {
+    color: #999;
     font-family: ${theme.fonts.default};
     font-size: 16px;
-    color: #999;
   }
   &:focus {
     outline: none;
@@ -230,9 +231,9 @@ export const Textarea = styled.textarea`
 `;
 
 export const InputCheckboxContainer = styled.div`
+  align-items: center;
   display: flex;
   flex-direction: row;
-  align-items: center;
   margin-bottom: 20px;
 `;
 
