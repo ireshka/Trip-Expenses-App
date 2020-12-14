@@ -1,15 +1,16 @@
 import React from 'react';
-import styled from 'styled-components';
-import { LinkButtonSmall, Ul } from './styled';
-import { Chip } from './Chip';
-import { theme } from '../utils/theme';
-import { setChoosenExpense } from '../redux/actions/userActions';
 import { connect } from 'react-redux';
+import styled from 'styled-components';
+
+import { setChoosenExpense } from '../redux/actions/userActions';
+import { theme } from '../utils/theme';
+import { Chip } from './Chip';
+import { LinkButtonSmall, Ul } from './styled';
 
 const ExpenseButtonSmall = styled(LinkButtonSmall)`
   margin: 0;
-  padding-right: 0.5rem;
   padding-left: 0.5rem;
+  padding-right: 0.5rem;
 `;
 
 const ExpenseLineWrapper = styled.li`
@@ -23,18 +24,18 @@ const ExpenseLineWrapper = styled.li`
 
 const ExpenseCard = styled.div`
   display: grid;
-  grid-template-rows: auto;
-  grid-template-columns: 1fr 1fr;
   grid-template-areas:
     'name name'
     'category cost'
     'action action';
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
   padding: 0 0.5rem;
   ${theme.media.landscapePhone} {
-    grid-template-columns: 1fr 1fr 1fr;
     grid-template-areas:
       'name name name'
       'category cost action';
+    grid-template-columns: 1fr 1fr 1fr;
   }
 `;
 
