@@ -1,32 +1,33 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { theme } from '../utils/theme';
-import HomePageImage from '../images/map-with-pins.png';
-import PinImage from '../images/pin.png';
+
+import HomePageImage from '../../images/map-with-pins.png';
+import PinImage from '../../images/pin.png';
+import { theme } from '../../utils/theme';
 
 const ContentWrapper = styled.div`
+  background-color: rgba(255, 255, 255, 0.85);
+  border-radius: 0;
+  box-shadow: 0 0 5px ${theme.colors.neutralMidDark};
   display: flex;
   flex-direction: column;
-  width: 100%;
+  margin: 40px auto 40px;
   max-width: 900px;
   min-width: 300px;
-  background-color: rgba(255, 255, 255, 0.85);
-  margin: 40px auto 40px;
   padding-bottom: 20px;
-  box-shadow: 0 0 5px ${theme.colors.neutralMidDark};
-  border-radius: 0;
+  width: 100%;
   ${theme.media.landscapePhone} {
-    width: 90%;
     border-radius: ${theme.radius.bg};
+    width: 90%;
   }
 `;
 
 const HeaderWrapper = styled.div`
+  align-items: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  width: 90%;
   margin: 30px auto 40px;
+  width: 90%;
   ${theme.media.landscapePhone} {
     flex-direction: row;
     margin: 30px auto 20px;
@@ -34,11 +35,11 @@ const HeaderWrapper = styled.div`
 `;
 
 const ImageWrapper = styled.div`
-  width: 100%;
-  display: flex;
   align-items: center;
+  display: flex;
   justify-content: center;
   padding: 20px;
+  width: 100%;
   ${theme.media.landscapePhone} {
     width: 30%;
   }
@@ -49,8 +50,8 @@ const ImgHomePage = styled.img`
 `;
 
 const HeaderTextWrapper = styled.div`
-  width: 100%;
   padding: 0 20px;
+  width: 100%;
   ${theme.media.landscapePhone} {
     width: 70%;
   }
@@ -69,19 +70,19 @@ const List = styled.ul`
 `;
 
 const ListItem = styled.li`
+  color: ${theme.colors.neutralMidDark};
   font-size: 18px;
   font-weight: 600;
-  color: ${theme.colors.neutralMidDark};
-  text-shadow: 0 0 2px ${theme.colors.white};
   margin-bottom: 18px;
+  text-shadow: 0 0 2px ${theme.colors.white};
   ${theme.media.tablet} {
     font-size: 22px;
   }
 `;
 
 const BodyWrapper = styled.div`
-  width: 70%;
   margin: 0 auto 20px;
+  width: 70%;
 `;
 
 class HomePage extends Component {

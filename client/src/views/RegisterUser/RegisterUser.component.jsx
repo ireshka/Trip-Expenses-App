@@ -1,14 +1,12 @@
 import axios from 'axios';
 import React from 'react';
-import { connect } from 'react-redux';
-import { Form, Label, Input } from './styled';
-import Button from './Button';
-import ContentWrapper from './ContentWrapper';
-import getSupportedCurrencies from '../utils/getSupportedCurrencies';
-import { setLoggedIn, setCurrencyList, setUserId } from '../redux/actions/userActions';
-import ErrorMessage from './ErrorMessage';
 
-class Login extends React.Component {
+import Button from '../../components/Button';
+import ContentWrapper from '../../components/ContentWrapper';
+import ErrorMessage from '../../components/ErrorMessage';
+import { Form, Input, Label, ParagraphSmallItalic } from '../../components/styled';
+
+class Signup extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -17,7 +15,6 @@ class Login extends React.Component {
       error: '',
     };
   }
-
   // hook candidate
   createErrorList = (errorList) => {
     errorList.forEach((errorElement) => {
@@ -45,19 +42,17 @@ class Login extends React.Component {
       username: this.state.username,
       password: this.state.password,
     };
-    const url = '/api/users/login';
+    const url = '/api/users/';
     this.setState({ error: '' });
     await axios
       .post(url, user)
       .then((res) => {
-        localStorage.setItem('travelplanner_x-auth-token', res.headers['x-auth-token']);
-        return res.data.userId;
+        console.log(res.data);
+        const username = res.data.username;
+        return username;
       })
-      .then((userId) => this.props.setUserId(userId))
-      .then(() => this.props.setLoggedIn())
-      .then(() => getSupportedCurrencies())
-      .then((list) => this.props.setCurrencyList(list))
-      .then(() => this.props.history.push('/trips/all'))
+      .then((username) => alert(`Hello ${username}. You've successfully register. Log in now`))
+      .then(() => this.props.history.push('/users/login'))
       .catch((err) => {
         const { errorList } = err.response.data;
         console.dir(errorList);
@@ -82,28 +77,32 @@ class Login extends React.Component {
       general: errorGeneral,
     } = this.state.error;
     return (
-      <ContentWrapper title="Login">
-        <ErrorMessage error={errorGeneral}></ErrorMessage>
-
+      <ContentWrapper title="Sign Up">
         <Form onSubmit={this.handleFormSubmit}>
-          <Label htmlFor="login-username">User name:</Label>
+          <ErrorMessage error={errorGeneral}></ErrorMessage>
+
+          <Label htmlFor="signup-name">User Name:</Label>
+          <ParagraphSmallItalic>Username should be 4-20 characters long</ParagraphSmallItalic>
           <Input
             type="text"
             name="username"
-            id="login-username"
-            placeholder="User name"
+            id="signup-name"
+            placeholder="Name"
             required
-            // Todo: ??? rewrite without bind
             onChange={this.handleInputChange.bind(this, 'username')}
             value={this.state.username}
           />
           <ErrorMessage error={errorUser}></ErrorMessage>
 
-          <Label htmlFor="login-password">Password:</Label>
+          <Label htmlFor="signup-password">Password:</Label>
+          <ParagraphSmallItalic>
+            Password should be minimum 8 characters long and should contain a number, a lowercase, a
+            capital letter and special character (!@#$%^&amp;)
+          </ParagraphSmallItalic>
           <Input
             type="password"
             name="password"
-            id="login-password"
+            id="signup-password"
             placeholder="Password"
             required
             onChange={this.handleInputChange.bind(this, 'password')}
@@ -111,27 +110,11 @@ class Login extends React.Component {
           />
           <ErrorMessage error={errorPassword}></ErrorMessage>
 
-          <Button textOnButton="Login" textColor="#fff" btnColor="#2EC66D" btnBorder="none" />
+          <Button textOnButton="Sign Up" textColor="#fff" btnColor="#2EC66D" btnBorder="none" />
         </Form>
       </ContentWrapper>
     );
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    isLoggedIn: state.isLoggedIn,
-    currencyList: state.currencyList,
-    userId: state.userId,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    setLoggedIn: () => dispatch(setLoggedIn()),
-    setCurrencyList: (list) => dispatch(setCurrencyList(list)),
-    setUserId: (userId) => dispatch(setUserId(userId)),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default Signup;

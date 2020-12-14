@@ -1,42 +1,50 @@
-import React, { Component } from 'react';
-import axios from 'axios';
-import { connect } from 'react-redux';
-import ContentWrapper from './ContentWrapper';
-import Chart from 'chart.js';
-import styled from 'styled-components';
-import { theme } from '../utils/theme';
-import getToken from '../utils/getToken';
-import { TripHeader, InnerContainer, H3, LinkText, NavLinksContainer } from './styled';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { setExchangeRates } from '../redux/actions/userActions';
+import axios from 'axios';
+import Chart from 'chart.js';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import styled from 'styled-components';
+
+import ContentWrapper from '../../components/ContentWrapper';
+import {
+  H3,
+  InnerContainer,
+  LinkText,
+  NavLinksContainer,
+  TripHeader,
+} from '../../components/styled';
+import { setExchangeRates } from '../../redux/actions/userActions';
+import getToken from '../../utils/getToken';
+import { theme } from '../../utils/theme';
+
 const Paragraph = styled.p`
   color: ${theme.colors.neutralDark};
   font-size: 20px;
-  text-align: center;
   font-weight: 700;
   margin: 5px;
+  text-align: center;
 `;
 
 const Li = styled.li`
-  list-style: circle;
   font-size: 14px;
   font-weight: 400;
-  width: 100%;
+  list-style: circle;
   margin: 0px auto;
-  text-align: left;
-  ${theme.colors.neutralMidDark};
-  padding: 0;
   margin-bottom: 4px;
+  padding: 0;
+  ${theme.colors.neutralMidDark};
+  text-align: left;
+  width: 100%;
 `;
 const ChartContainer = styled.div`
-  width: 80%;
   margin: 0 auto;
+  width: 80%;
 `;
 
 const ColoredLine = styled.hr`
-  width: 70%;
   height: 3px;
   margin: 10px auto;
+  width: 70%;
   ${theme.colors.neutralMidDark};
 `;
 
@@ -47,9 +55,9 @@ const UnorderedList = styled.ul`
 
 const SubTitle = styled(H3)`
   color: ${theme.colors.neutralDark};
+  font-weight: 700;
   margin: 10px auto;
   text-align: center;
-  font-weight: 700;
 `;
 
 class TripSummary extends Component {

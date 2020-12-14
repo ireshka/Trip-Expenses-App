@@ -1,33 +1,35 @@
+import 'react-datepicker/dist/react-datepicker.css';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import axios from 'axios';
+import moment from 'moment';
 import React, { Component } from 'react';
 import DatePicker from 'react-datepicker';
 import { connect } from 'react-redux';
-import axios from 'axios';
-import moment from 'moment';
-import 'react-datepicker/dist/react-datepicker.css';
+import Select from 'react-select';
+
+import Button from '../../components/Button';
+import ContentWrapper from '../../components/ContentWrapper';
 import {
+  customStyleSelect,
+  DateInput,
   Form,
-  Label,
   Input,
   InputCheckbox,
-  InputContainer,
-  DateInput,
-  ParagraphSmallItalic,
-  Textarea,
   InputCheckboxContainer,
-  customStyleSelect,
-  TripHeader,
+  InputContainer,
+  Label,
   LinkText,
   NavLinksContainer,
-} from './styled';
-import Select from 'react-select';
-import Button from './Button';
-import ContentWrapper from './ContentWrapper';
-import getToken from '../utils/getToken';
-import formatCurrencies from '../utils/formatCurrencies';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { updateChoosenTrip, clearChoosenTrip } from '../redux/actions/userActions';
+  ParagraphSmallItalic,
+  Textarea,
+  TripHeader,
+} from '../../components/styled';
+import { clearChoosenTrip, updateChoosenTrip } from '../../redux/actions/userActions';
+import formatCurrencies from '../../utils/formatCurrencies';
+import getToken from '../../utils/getToken';
 
-class EditTrip extends Component {
+class TripEdit extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -260,4 +262,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(EditTrip);
+export default connect(mapStateToProps, mapDispatchToProps)(TripEdit);

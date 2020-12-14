@@ -1,13 +1,14 @@
-import React, { Component } from 'react';
-import axios from 'axios';
-import { connect } from 'react-redux';
-import { LinkButtonBig, TripHeader, LinkText, NavLinksContainer } from './styled';
-import ExpenseLine, { ExpensesList } from './ExpensesList';
-import ContentWrapper from './ContentWrapper';
-import getToken from '../utils/getToken';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import axios from 'axios';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-class AllExpenses extends Component {
+import ContentWrapper from '../../components/ContentWrapper';
+import ExpenseLine, { ExpensesList } from '../../components/ExpensesList';
+import { LinkButtonBig, LinkText, NavLinksContainer, TripHeader } from '../../components/styled';
+import getToken from '../../utils/getToken';
+
+class ExpensesAll extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -83,4 +84,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(AllExpenses);
+export default connect(mapStateToProps)(ExpensesAll);
