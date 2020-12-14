@@ -1,25 +1,26 @@
+import moment from 'moment';
 import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import moment from 'moment';
-import { theme } from '../utils/theme';
-import { H4, LinkButtonSmall, InputCheckboxContainer, Label } from './styled';
+
 import PinImage from '../images/pin.png';
 import { setChoosenTrip } from '../redux/actions/userActions';
+import { theme } from '../utils/theme';
+import { H4, InputCheckboxContainer, Label, LinkButtonSmall } from './styled';
 
 const Card = styled.div`
   margin-bottom: 20px;
 `;
 
 const CardHeader = styled.div`
-  display: flex;
-  flex-direction: row;
   align-items: center;
-  min-height: 34px;
   background-color: ${(props) =>
     props.status === 'open' ? theme.colors.trip : theme.colors.neutralMidLight};
-  color: ${theme.colors.white};
   border-radius: 5px 5px 0 0;
+  color: ${theme.colors.white};
+  display: flex;
+  flex-direction: row;
+  min-height: 34px;
 `;
 
 const CardTitle = styled(H4)`
@@ -27,27 +28,27 @@ const CardTitle = styled(H4)`
 `;
 
 const CardBody = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 15px 0 0 0;
   background-color: ${theme.colors.white};
   border: 1px solid
     ${(props) => (props.status === 'open' ? theme.colors.trip : theme.colors.neutralMidLight)};
   border-radius: 0 0 5px 5px;
+  display: flex;
+  flex-direction: column;
+  padding: 15px 0 0 0;
 `;
 
 const ParagraphAlignedLeft = styled.p`
   font-size: 16px;
   font-weight: 400;
-  text-align: left;
   margin: 0 0 8px 0;
+  text-align: left;
 `;
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  width: 90%;
   margin: 0 auto;
+  width: 90%;
 `;
 const ContainerButtons = styled.div`
   display: flex;
@@ -58,10 +59,10 @@ const ContainerButtons = styled.div`
 `;
 
 const CustomSmallButton = styled(LinkButtonSmall)`
-  margin: 0px 10px 20px;
-  width: 40%;
-  min-width: 150px;
   flex-grow: 1;
+  margin: 0px 10px 20px;
+  min-width: 150px;
+  width: 40%;
 `;
 
 const InputCheckboxCustom = styled.input`

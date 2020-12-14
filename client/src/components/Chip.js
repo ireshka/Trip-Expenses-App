@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+
 import { theme } from '../utils/theme';
 
 const DefaultChip = styled.span`
@@ -11,8 +12,8 @@ const DefaultChip = styled.span`
   font-weight: bold;
   margin: 0.2em;
   padding: 0.3em;
-  text-transform: uppercase;
   text-align: center;
+  text-transform: uppercase;
 `;
 
 export const Chip = (props) => {

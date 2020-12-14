@@ -1,7 +1,8 @@
-import React from 'react';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faWallet, faDollarSign, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faDollarSign, faWallet } from '@fortawesome/free-solid-svg-icons';
+import React from 'react';
 import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
+
 import { theme } from '../utils/theme';
 
 // Add favicons that will be used in the project
@@ -35,16 +36,16 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const StyledWrapper = styled.div`
-  min-height: 100vh;
-  min-width: 300px;
-  display: flex;
-  flex-direction: column;
   align-items: center;
   background-image: linear-gradient(${theme.colors.bgOverlay}, ${theme.colors.bgOverlay}),
     url('/images/bg-1.jpg');
+  background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: center;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-width: 300px;
 `;
 
 const Layout = ({ children }) => (

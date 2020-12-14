@@ -1,27 +1,28 @@
 import React from 'react';
 import styled from 'styled-components';
+
 import { theme } from '../utils/theme';
 
 const DefaultButton = styled.button`
   background-color: ${theme.colors.white};
+  border: none;
   border-radius: 5px;
-  min-height: 40px;
-  margin: 0 auto 20px;
-  width: 100%;
+  box-shadow: 0 0 4px ${theme.colors.neutralLight};
+  color: ${theme.colors.neutralMidDark};
+  cursor: pointer;
   font-size: 20px;
   font-weight: 400;
-  text-align: center;
-  border: none;
-  color: ${theme.colors.neutralMidDark};
-  user-select: none;
+  margin: 0 auto 20px;
+  min-height: 40px;
   outline: none;
-  box-shadow: 0 0 4px ${theme.colors.neutralLight};
-  cursor: pointer;
+  text-align: center;
   transition: 0.3s;
+  user-select: none;
+  width: 100%;
 
   &:hover {
-    font-weight: 600;
     box-shadow: 0 0 4px ${theme.colors.neutralMidLight};
+    font-weight: 600;
   }
   &:focus {
     outline: none;
