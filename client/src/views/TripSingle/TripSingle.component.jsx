@@ -1,19 +1,20 @@
-import React, { Component } from 'react';
-import moment from 'moment';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
+import moment from 'moment';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
+
+import ContentWrapper from '../../components/ContentWrapper';
 import {
-  TripHeader,
   InfoWrapper,
   InnerContainer,
-  ParagraphAlignedCenter,
   LinkButtonBig,
-} from './styled';
-import ContentWrapper from './ContentWrapper';
-import getToken from '../utils/getToken';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+  ParagraphAlignedCenter,
+  TripHeader,
+} from '../../components/styled';
+import getToken from '../../utils/getToken';
 
-class SingleTrip extends Component {
+class TripSingle extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -91,4 +92,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(SingleTrip);
+export default connect(mapStateToProps)(TripSingle);

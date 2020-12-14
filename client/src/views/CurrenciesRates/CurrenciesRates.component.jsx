@@ -1,14 +1,21 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import moment from 'moment';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import moment from 'moment';
 import styled from 'styled-components';
-import { theme } from '../utils/theme';
-import { ParagraphAlignedCenter, TripHeader, Ul, LinkText, NavLinksContainer } from './styled';
-import ContentWrapper from './ContentWrapper';
-import formatCurrencies from '../utils/formatCurrencies';
-import getActualCurrencyRates from '../utils/getActualCurrencyRates';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { setExchangeRates } from '../redux/actions/userActions';
+
+import ContentWrapper from '../../components/ContentWrapper';
+import {
+  LinkText,
+  NavLinksContainer,
+  ParagraphAlignedCenter,
+  TripHeader,
+  Ul,
+} from '../../components/styled';
+import { setExchangeRates } from '../../redux/actions/userActions';
+import formatCurrencies from '../../utils/formatCurrencies';
+import getActualCurrencyRates from '../../utils/getActualCurrencyRates';
+import { theme } from '../../utils/theme';
 
 const LeadingText = styled(ParagraphAlignedCenter)`
   font-size: 1.2em;

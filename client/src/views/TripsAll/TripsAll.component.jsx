@@ -1,15 +1,16 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import axios from 'axios';
 import moment from 'moment';
-import ContentWrapper from './ContentWrapper';
-import { LinkButtonBig, ParagraphAlignedCenter } from './styled';
-import getToken from '../utils/getToken';
-import TripCard from './TripCard';
-import getActualCurrencyRates from '../utils/getActualCurrencyRates';
-import { setExchangeRates } from '../redux/actions/userActions';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-class AllTrips extends Component {
+import ContentWrapper from '../../components/ContentWrapper';
+import { LinkButtonBig, ParagraphAlignedCenter } from '../../components/styled';
+import TripCard from '../../components/TripCard';
+import { setExchangeRates } from '../../redux/actions/userActions';
+import getActualCurrencyRates from '../../utils/getActualCurrencyRates';
+import getToken from '../../utils/getToken';
+
+class TripsAll extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -95,4 +96,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AllTrips);
+export default connect(mapStateToProps, mapDispatchToProps)(TripsAll);

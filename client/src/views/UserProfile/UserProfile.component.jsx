@@ -1,33 +1,34 @@
+import axios from 'axios';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import axios from 'axios';
 import styled from 'styled-components';
-import { theme } from '../utils/theme';
-import ContentWrapper from './ContentWrapper';
-import { H3, InnerContainer, LinkButtonSmall } from './styled';
-import getToken from '../utils/getToken';
+
+import ContentWrapper from '../../components/ContentWrapper';
+import { H3, InnerContainer, LinkButtonSmall } from '../../components/styled';
+import getToken from '../../utils/getToken';
+import { theme } from '../../utils/theme';
 
 const SectionTitle = styled(H3)`
   &::after {
+    background-color: ${theme.colors.neutralMidLight};
     content: '';
     display: block;
     height: 2px;
-    width: 70%;
     margin: 15px 0 30px;
-    background-color: ${theme.colors.neutralMidLight};
+    width: 70%;
   }
 `;
 
 const Button = styled(LinkButtonSmall)`
-  width: 200px;
   margin: 0 auto 20px 0;
+  width: 200px;
 `;
 
 const ParagraphAlignedLeft = styled.p`
   font-size: 16px;
   font-weight: 400;
-  text-align: left;
   margin: 0 0 8px 0;
+  text-align: left;
 `;
 
 const Section = styled.div`
@@ -44,8 +45,8 @@ const DataGroup = styled.div`
 `;
 
 const LabelData = styled(ParagraphAlignedLeft)`
-  width: 90px;
   margin-right: 20px;
+  width: 90px;
 `;
 const DisabledText = styled(ParagraphAlignedLeft)`
   color: ${theme.colors.neutralMidDark};

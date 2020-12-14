@@ -1,26 +1,28 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+
 import axios from 'axios';
 import moment from 'moment';
-import 'react-datepicker/dist/react-datepicker.css';
+import React, { Component } from 'react';
+import DatePicker from 'react-datepicker';
+import { connect } from 'react-redux';
+import Select from 'react-select';
+
+import Button from '../../components/Button';
+import ContentWrapper from '../../components/ContentWrapper';
 import {
-  Form,
-  Label,
-  Input,
+  customStyleSelect,
   DateInput,
+  Form,
+  Input,
   InputContainer,
+  Label,
   ParagraphSmallItalic,
   Textarea,
-  customStyleSelect,
-} from './styled';
-import Select from 'react-select';
-import Button from './Button';
-import ContentWrapper from './ContentWrapper';
-import getToken from '../utils/getToken';
-import formatCurrencies from '../utils/formatCurrencies';
+} from '../../components/styled';
+import formatCurrencies from '../../utils/formatCurrencies';
+import getToken from '../../utils/getToken';
 
-class AddTrip extends Component {
+class TripAdd extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -174,4 +176,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(AddTrip);
+export default connect(mapStateToProps)(TripAdd);
