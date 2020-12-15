@@ -1,7 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-import Layout from '../../layout/Layout';
+import RootProvider from '../../providers/RootProvider';
+// import Layout from '../../layout/Layout';
 import CurrenciesRates from '../../views/CurrenciesRates/CurrenciesRates.component';
 import ExpenseAdd from '../../views/ExpenseAdd/ExpenseAdd.component';
 import ExpenseEdit from '../../views/ExpenseEdit/ExpenseEdit.component';
@@ -15,16 +16,15 @@ import TripsAll from '../../views/TripsAll/TripsAll.component';
 import TripSingle from '../../views/TripSingle/TripSingle.component';
 import TripSummary from '../../views/TripSummary/TripSummary.component';
 import UserProfile from '../../views/UserProfile/UserProfile.component';
-import Footer from '../Footer/Footer.component';
-import Header from '../Header/Header.component';
+// import Footer from '../Footer/Footer.component';
+// import Header from '../Header/Header.component';
 import PrivateRoute from '../PrivateRoute/PrivateRoute.component';
 
 class App extends React.Component {
   render() {
     return (
       <Router>
-        <Layout>
-          <Header />
+        <RootProvider>
           <Route path="/" exact component={HomePage} />
           <PrivateRoute path="/trips/add" component={TripAdd} />
           <PrivateRoute path="/trips/edit/:id" component={TripEdit} />
@@ -38,8 +38,7 @@ class App extends React.Component {
           <PrivateRoute path="/trips/:tripId/expenses/all" component={ExpensesAll} />
           <PrivateRoute path="/users/profile" component={UserProfile} />
           <PrivateRoute path="/trips/currencies/:tripId" component={CurrenciesRates} />
-          <Footer />
-        </Layout>
+        </RootProvider>
       </Router>
     );
   }
