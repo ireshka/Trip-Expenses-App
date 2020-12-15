@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
-import { theme } from '../utils/theme';
+// import { theme } from '../utils/theme';
 
 export const H2 = styled.h2`
   font-size: 24px;
@@ -248,65 +248,3 @@ export const InputCheckboxContainer = styled.div`
   flex-direction: row;
   margin-bottom: 20px;
 `;
-
-// const handleSelectStyles = (theme) => ({
-//   container: (provided) => ({
-//     ...provided,
-//     marginBottom: theme.palette.primary,
-//   }),
-// });
-
-export const customStyleSelect = {
-  container: (provided) => ({
-    ...provided,
-    marginBottom: '20px',
-  }),
-  option: (provided, state) => {
-    return {
-      ...provided,
-      color: '#000',
-      padding: 2,
-      fontFamily: theme.fonts.default,
-    };
-  },
-  control: (provided) => ({
-    ...provided,
-    borderRadius: '3px',
-    // border: '1px solid #000',
-    fontFamily: theme.fonts.default,
-  }),
-  placeholder: () => ({
-    fontFamily: theme.fonts.default,
-  }),
-  dropdownIndicator: (defaultStyles) => ({
-    ...defaultStyles,
-    color: 'purple',
-  }),
-};
-
-// working copy:
-// export const customStyleSelect = {
-//   container: (provided) => ({
-//     ...provided,
-//     marginBottom: '20px',
-//   }),
-//   option: (provided, state) => ({
-//     ...provided,
-//     color: '#000',
-//     padding: 2,
-//     fontFamily: theme.fonts.default,
-//   }),
-//   control: (provided) => ({
-//     ...provided,
-//     borderRadius: '3px',
-//     // border: '1px solid #000',
-//     fontFamily: theme.fonts.default,
-//   }),
-//   placeholder: () => ({
-//     fontFamily: theme.fonts.default,
-//   }),
-//   dropdownIndicator: (defaultStyles) => ({
-//     ...defaultStyles,
-//     color: 'purple',
-//   }),
-// };

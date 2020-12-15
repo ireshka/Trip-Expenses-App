@@ -6,11 +6,11 @@ import React, { Component } from 'react';
 import DatePicker from 'react-datepicker';
 import { connect } from 'react-redux';
 import Select from 'react-select';
+import { withTheme } from 'styled-components';
 
 import Button from '../../components/Button/Button.component';
 import ContentWrapper from '../../components/ContentWrapper/ContentWrapper.component';
 import {
-  customStyleSelect,
   DateInput,
   Form,
   Input,
@@ -19,6 +19,7 @@ import {
   ParagraphSmallItalic,
   Textarea,
 } from '../../components/styled';
+import { customStyleSelect } from '../../styles/customStyleSelect';
 import formatCurrencies from '../../utils/formatCurrencies';
 import getToken from '../../utils/getToken';
 
@@ -97,6 +98,7 @@ class TripAdd extends Component {
   };
 
   render() {
+    const { theme } = this.props;
     return (
       <ContentWrapper title="Add Trip">
         <Form onSubmit={this.onFormSubmit}>
@@ -142,7 +144,7 @@ class TripAdd extends Component {
 
           <Label htmlFor="budgetCurrency-add">Currency:</Label>
           <Select
-            styles={customStyleSelect}
+            styles={customStyleSelect(theme)}
             options={this.state.tripCurrencies}
             type="text"
             name="budgetCurrency"
@@ -176,4 +178,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(TripAdd);
+export default connect(mapStateToProps)(withTheme(TripAdd));
