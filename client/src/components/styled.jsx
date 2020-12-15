@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import { theme } from '../utils/theme';
 
@@ -25,13 +25,15 @@ export const ParagraphAlignedCenter = styled.p`
 `;
 
 const TripNameHeaderWrapper = styled.div`
-  align-items: center;
-  background-color: ${theme.colors.trip};
-  color: ${theme.colors.white};
-  display: flex;
-  height: 60px;
-  justify-content: center;
-  width: 100%;
+  ${({ theme }) => css`
+    align-items: center;
+    background-color: ${theme.colors.trip};
+    color: ${theme.colors.white};
+    display: flex;
+    height: 60px;
+    justify-content: center;
+    width: 100%;
+  `};
 `;
 export const TripHeader = (prop) => {
   return (
@@ -57,56 +59,58 @@ export const InnerContainer = styled.div`
 `;
 
 export const LinkButtonBig = styled(Link)`
-  /*  You can adapt the button adding color prop. Colors prop should be one of: green, greenOutline, grey, greyOutline, disabled */
-  background-color: ${(props) =>
-    props.color === 'green'
-      ? theme.colors.btnMain
-      : props.color === 'grey'
-      ? theme.colors.neutralExtraLight
-      : theme.colors.white};
-  border: 1px solid
-    ${(props) =>
-      props.color === 'green' || props.color === 'greenOutline'
+  ${({ theme }) => css`
+    /*  You can adapt the button adding color prop. Colors prop should be one of: green, greenOutline, grey, greyOutline, disabled */
+    background-color: ${(props) =>
+      props.color === 'green'
         ? theme.colors.btnMain
         : props.color === 'grey'
-        ? theme.colors.neutralLight
+        ? theme.colors.neutralExtraLight
+        : theme.colors.white};
+    border: 1px solid
+      ${(props) =>
+        props.color === 'green' || props.color === 'greenOutline'
+          ? theme.colors.btnMain
+          : props.color === 'grey'
+          ? theme.colors.neutralLight
+          : props.color === 'disabled'
+          ? theme.colors.neutralMidLight
+          : theme.colors.neutralMidDark};
+    border-radius: 5px;
+    box-shadow: 0 0 4px ${theme.colors.neutralLight};
+    color: ${(props) =>
+      props.color === 'green'
+        ? theme.colors.white
+        : props.color === 'greenOutline'
+        ? theme.colors.btnMain
+        : props.color === 'grey'
+        ? theme.colors.neutralMidDark
+        : props.color === 'greyOutline'
+        ? theme.colors.neutralMidDark
         : props.color === 'disabled'
         ? theme.colors.neutralMidLight
         : theme.colors.neutralMidDark};
-  border-radius: 5px;
-  box-shadow: 0 0 4px ${theme.colors.neutralLight};
-  color: ${(props) =>
-    props.color === 'green'
-      ? theme.colors.white
-      : props.color === 'greenOutline'
-      ? theme.colors.btnMain
-      : props.color === 'grey'
-      ? theme.colors.neutralMidDark
-      : props.color === 'greyOutline'
-      ? theme.colors.neutralMidDark
-      : props.color === 'disabled'
-      ? theme.colors.neutralMidLight
-      : theme.colors.neutralMidDark};
-  cursor: pointer;
-  display: block;
-  font-size: 20px;
-  font-weight: 400;
-  margin: 0 auto 20px;
-  min-height: 40px;
-  padding: 6.5px;
-  text-align: center;
-  text-decoration: none;
-  transition: 0.3s;
-  width: 100%;
+    cursor: pointer;
+    display: block;
+    font-size: 20px;
+    font-weight: 400;
+    margin: 0 auto 20px;
+    min-height: 40px;
+    padding: 6.5px;
+    text-align: center;
+    text-decoration: none;
+    transition: 0.3s;
+    width: 100%;
 
-  &:hover {
-    background-color: ${(props) => props.green && '#15AD54'};
-    ${(props) =>
-      props.color !== 'disabled' &&
-      `font-weight: 600;
-      box-shadow: 0 0 4px;    
+    &:hover {
+      background-color: ${(props) => props.green && '#15AD54'};
+      ${(props) =>
+        props.color !== 'disabled' &&
+        `font-weight: 600;
+      box-shadow: 0 0 4px;
     `}
-  }
+    }
+  `};
 `;
 
 export const LinkButtonSmall = styled(LinkButtonBig)`
@@ -117,17 +121,19 @@ export const LinkButtonSmall = styled(LinkButtonBig)`
 `;
 
 export const LinkText = styled(Link)`
-  color: #767676;
-  font-size: 16px;
-  margin-bottom: 10px;
-  text-decoration: none;
-  &:visited {
+  ${({ theme }) => css`
     color: #767676;
+    font-size: 16px;
+    margin-bottom: 10px;
     text-decoration: none;
-  }
-  &:hover {
-    color: ${theme.colors.neutralMidDark};
-  }
+    &:visited {
+      color: #767676;
+      text-decoration: none;
+    }
+    &:hover {
+      color: ${theme.colors.neutralMidDark};
+    }
+  `};
 `;
 
 export const NavLinksContainer = styled.div`
@@ -163,23 +169,25 @@ export const Label = styled.label`
 `;
 
 export const Input = styled.input`
-  border: 1px solid ${theme.colors.neutralExtraLight};
-  border-radius: 5px;
-  box-shadow: 0 0 4px ${theme.colors.neutralExtraLight};
-  color: ${theme.colors.neutralDark};
-  display: inline-block;
-  font-size: 16px;
-  margin: 0 auto 20px;
-  padding: 5px;
-  width: 100%;
-  &::placeholder {
-    color: #999;
+  ${({ theme }) => css`
+    border: 1px solid ${theme.colors.neutralExtraLight};
+    border-radius: 5px;
+    box-shadow: 0 0 4px ${theme.colors.neutralExtraLight};
+    color: ${theme.colors.neutralDark};
+    display: inline-block;
     font-size: 16px;
-  }
-  &:focus {
-    box-shadow: 0 0 4px ${theme.colors.neutralMidLight};
-    outline: none;
-  }
+    margin: 0 auto 20px;
+    padding: 5px;
+    width: 100%;
+    &::placeholder {
+      color: #999;
+      font-size: 16px;
+    }
+    &:focus {
+      box-shadow: 0 0 4px ${theme.colors.neutralMidLight};
+      outline: none;
+    }
+  `};
 `;
 
 export const InputCheckbox = styled.input`
@@ -199,35 +207,39 @@ export const InputContainer = styled.div`
 `;
 
 export const ParagraphSmallItalic = styled.p`
-  color: ${theme.colors.neutralMidDark};
-  font-size: 14px;
-  font-style: italic;
-  font-weight: 300;
-  margin: 3px 0;
-  padding: 0;
+  ${({ theme }) => css`
+    color: ${theme.colors.neutralMidDark};
+    font-size: 14px;
+    font-style: italic;
+    font-weight: 300;
+    margin: 3px 0;
+    padding: 0;
+  `};
 `;
 
 export const Textarea = styled.textarea`
-  border: 1px solid ${theme.colors.neutralLight};
-  border-radius: 5px;
-  color: ${theme.colors.neutralDark};
-  display: block;
-  font-family: ${theme.fonts.default};
-  font-size: 16px;
-  font-weight: 400;
-  height: 100px;
-  margin-bottom: 20px;
-  padding: 5px;
-  resize: vertical;
-  width: 100%;
-  &::placeholder {
-    color: #999;
+  ${({ theme }) => css`
+    border: 1px solid ${theme.colors.neutralLight};
+    border-radius: 5px;
+    color: ${theme.colors.neutralDark};
+    display: block;
     font-family: ${theme.fonts.default};
     font-size: 16px;
-  }
-  &:focus {
-    outline: none;
-  }
+    font-weight: 400;
+    height: 100px;
+    margin-bottom: 20px;
+    padding: 5px;
+    resize: vertical;
+    width: 100%;
+    &::placeholder {
+      color: #999;
+      font-family: ${theme.fonts.default};
+      font-size: 16px;
+    }
+    &:focus {
+      outline: none;
+    }
+  `};
 `;
 
 export const InputCheckboxContainer = styled.div`
@@ -237,17 +249,26 @@ export const InputCheckboxContainer = styled.div`
   margin-bottom: 20px;
 `;
 
+// const handleSelectStyles = (theme) => ({
+//   container: (provided) => ({
+//     ...provided,
+//     marginBottom: theme.palette.primary,
+//   }),
+// });
+
 export const customStyleSelect = {
   container: (provided) => ({
     ...provided,
     marginBottom: '20px',
   }),
-  option: (provided, state) => ({
-    ...provided,
-    color: '#000',
-    padding: 2,
-    fontFamily: theme.fonts.default,
-  }),
+  option: (provided, state) => {
+    return {
+      ...provided,
+      color: '#000',
+      padding: 2,
+      fontFamily: theme.fonts.default,
+    };
+  },
   control: (provided) => ({
     ...provided,
     borderRadius: '3px',
@@ -262,3 +283,30 @@ export const customStyleSelect = {
     color: 'purple',
   }),
 };
+
+// working copy:
+// export const customStyleSelect = {
+//   container: (provided) => ({
+//     ...provided,
+//     marginBottom: '20px',
+//   }),
+//   option: (provided, state) => ({
+//     ...provided,
+//     color: '#000',
+//     padding: 2,
+//     fontFamily: theme.fonts.default,
+//   }),
+//   control: (provided) => ({
+//     ...provided,
+//     borderRadius: '3px',
+//     // border: '1px solid #000',
+//     fontFamily: theme.fonts.default,
+//   }),
+//   placeholder: () => ({
+//     fontFamily: theme.fonts.default,
+//   }),
+//   dropdownIndicator: (defaultStyles) => ({
+//     ...defaultStyles,
+//     color: 'purple',
+//   }),
+// };
