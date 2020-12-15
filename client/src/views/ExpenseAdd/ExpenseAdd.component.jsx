@@ -3,12 +3,12 @@ import axios from 'axios';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Select from 'react-select';
+import { withTheme } from 'styled-components';
 
 import Button from '../../components/Button/Button.component';
 import ContentWrapper from '../../components/ContentWrapper/ContentWrapper.component';
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage.component';
 import {
-  customStyleSelect,
   Form,
   Input,
   Label,
@@ -16,6 +16,7 @@ import {
   NavLinksContainer,
   TripHeader,
 } from '../../components/styled';
+import { customStyleSelect } from '../../styles/customStyleSelect';
 import formatCurrencies from '../../utils/formatCurrencies';
 import getToken from '../../utils/getToken';
 
@@ -116,6 +117,7 @@ class ExpenseAdd extends Component {
   }
 
   render() {
+    const { theme } = this.props;
     return (
       <>
         <TripHeader name={this.props.choosenTripName} />
@@ -150,7 +152,7 @@ class ExpenseAdd extends Component {
 
             <Label htmlFor="expenseCurrency-add">Currency:</Label>
             <Select
-              styles={customStyleSelect}
+              styles={customStyleSelect(theme)}
               options={this.state.tripCurrencies}
               type="text"
               name="expenseCurrency"
@@ -162,7 +164,7 @@ class ExpenseAdd extends Component {
 
             <Label htmlFor="expenseCategory-add">Category:</Label>
             <Select
-              styles={customStyleSelect}
+              styles={customStyleSelect(theme)}
               options={this.state.tripCategories}
               type="text"
               name="expenseCategory"
@@ -198,4 +200,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(ExpenseAdd);
+export default connect(mapStateToProps)(withTheme(ExpenseAdd));

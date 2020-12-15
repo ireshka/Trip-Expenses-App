@@ -7,11 +7,11 @@ import React, { Component } from 'react';
 import DatePicker from 'react-datepicker';
 import { connect } from 'react-redux';
 import Select from 'react-select';
+import { withTheme } from 'styled-components';
 
 import Button from '../../components/Button/Button.component';
 import ContentWrapper from '../../components/ContentWrapper/ContentWrapper.component';
 import {
-  customStyleSelect,
   DateInput,
   Form,
   Input,
@@ -26,6 +26,7 @@ import {
   TripHeader,
 } from '../../components/styled';
 import { clearChoosenTrip, updateChoosenTrip } from '../../redux/actions/userActions';
+import { customStyleSelect } from '../../styles/customStyleSelect';
 import formatCurrencies from '../../utils/formatCurrencies';
 import getToken from '../../utils/getToken';
 
@@ -143,6 +144,7 @@ class TripEdit extends Component {
   }
 
   render() {
+    const { theme } = this.props;
     return (
       <>
         <TripHeader name={this.props.choosenTripName} />
@@ -190,7 +192,7 @@ class TripEdit extends Component {
 
             <Label htmlFor="budgetCurrency-add">Currency:</Label>
             <Select
-              styles={customStyleSelect}
+              styles={customStyleSelect(theme)}
               options={this.state.tripCurrencies}
               type="text"
               name="budgetCurrency"
@@ -262,4 +264,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(TripEdit);
+export default connect(mapStateToProps, mapDispatchToProps)(withTheme(TripEdit));
