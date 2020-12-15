@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { focusStyle } from '../utils/mixins';
-import { theme } from '../utils/theme';
+import { focusStyle } from '../../utils/mixins';
+import { theme } from '../../utils/theme';
 
 const FooterWrapper = styled.div`
   background-color: ${theme.colors.dark};

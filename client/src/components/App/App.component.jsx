@@ -1,23 +1,23 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-import Layout from '../layout/Layout';
-import CurrenciesRates from '../views/CurrenciesRates/CurrenciesRates.component';
-import ExpenseAdd from '../views/ExpenseAdd/ExpenseAdd.component';
-import ExpenseEdit from '../views/ExpenseEdit/ExpenseEdit.component';
-import ExpensesAll from '../views/ExpensesAll/ExpensesAll.component';
-import HomePage from '../views/HomePage/HomePage.component';
-import RegisterUser from '../views/RegisterUser/RegisterUser.component';
-import SignIn from '../views/SignIn/SignIn.component';
-import TripAdd from '../views/TripAdd/TripAdd.component';
-import TripEdit from '../views/TripEdit/TripEdit.component';
-import TripsAll from '../views/TripsAll/TripsAll.component';
-import TripSingle from '../views/TripSingle/TripSingle.component';
-import TripSummary from '../views/TripSummary/TripSummary.component';
-import UserProfile from '../views/UserProfile/UserProfile.component';
-import Footer from './Footer';
-import Header from './Header';
-import PrivateRoute from './PrivateRoute';
+import Layout from '../../layout/Layout';
+import CurrenciesRates from '../../views/CurrenciesRates/CurrenciesRates.component';
+import ExpenseAdd from '../../views/ExpenseAdd/ExpenseAdd.component';
+import ExpenseEdit from '../../views/ExpenseEdit/ExpenseEdit.component';
+import ExpensesAll from '../../views/ExpensesAll/ExpensesAll.component';
+import HomePage from '../../views/HomePage/HomePage.component';
+import RegisterUser from '../../views/RegisterUser/RegisterUser.component';
+import SignIn from '../../views/SignIn/SignIn.component';
+import TripAdd from '../../views/TripAdd/TripAdd.component';
+import TripEdit from '../../views/TripEdit/TripEdit.component';
+import TripsAll from '../../views/TripsAll/TripsAll.component';
+import TripSingle from '../../views/TripSingle/TripSingle.component';
+import TripSummary from '../../views/TripSummary/TripSummary.component';
+import UserProfile from '../../views/UserProfile/UserProfile.component';
+import Footer from '../Footer/Footer.component';
+import Header from '../Header/Header.component';
+import PrivateRoute from '../PrivateRoute/PrivateRoute.component';
 
 class App extends React.Component {
   render() {

@@ -4,9 +4,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Select from 'react-select';
 
-import Button from '../../components/Button';
-import ContentWrapper from '../../components/ContentWrapper';
-import ErrorMessage from '../../components/ErrorMessage';
+import Button from '../../components/Button/Button.component';
+import ContentWrapper from '../../components/ContentWrapper/ContentWrapper.component';
+import ErrorMessage from '../../components/ErrorMessage/ErrorMessage.component';
 import {
   customStyleSelect,
   Form,

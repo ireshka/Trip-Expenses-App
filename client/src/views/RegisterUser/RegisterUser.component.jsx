@@ -1,9 +1,9 @@
 import axios from 'axios';
 import React from 'react';
 
-import Button from '../../components/Button';
-import ContentWrapper from '../../components/ContentWrapper';
-import ErrorMessage from '../../components/ErrorMessage';
+import Button from '../../components/Button/Button.component';
+import ContentWrapper from '../../components/ContentWrapper/ContentWrapper.component';
+import ErrorMessage from '../../components/ErrorMessage/ErrorMessage.component';
 import { Form, Input, Label, ParagraphSmallItalic } from '../../components/styled';
 
 class Signup extends React.Component {

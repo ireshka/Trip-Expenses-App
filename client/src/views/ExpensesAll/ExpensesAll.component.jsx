@@ -3,8 +3,8 @@ import axios from 'axios';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import ContentWrapper from '../../components/ContentWrapper';
-import ExpenseLine, { ExpensesList } from '../../components/ExpensesList';
+import ContentWrapper from '../../components/ContentWrapper/ContentWrapper.component';
+import ExpenseLine, { ExpensesList } from '../../components/ExpensesList/ExpensesList.component';
 import { LinkButtonBig, LinkText, NavLinksContainer, TripHeader } from '../../components/styled';
 import getToken from '../../utils/getToken';
 

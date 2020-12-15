@@ -3,10 +3,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
-import PinImage from '../images/pin.png';
-import { setChoosenTrip } from '../redux/actions/userActions';
-import { theme } from '../utils/theme';
-import { H4, InputCheckboxContainer, Label, LinkButtonSmall } from './styled';
+import PinImage from '../../images/pin.png';
+import { setChoosenTrip } from '../../redux/actions/userActions';
+import { theme } from '../../utils/theme';
+import { H4, InputCheckboxContainer, Label, LinkButtonSmall } from '../styled';
 
 const Card = styled.div`
   margin-bottom: 20px;

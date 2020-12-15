@@ -3,9 +3,9 @@ import moment from 'moment';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import ContentWrapper from '../../components/ContentWrapper';
+import ContentWrapper from '../../components/ContentWrapper/ContentWrapper.component';
 import { LinkButtonBig, ParagraphAlignedCenter } from '../../components/styled';
-import TripCard from '../../components/TripCard';
+import TripCard from '../../components/TripCard/TripCard.component';
 import { setExchangeRates } from '../../redux/actions/userActions';
 import getActualCurrencyRates from '../../utils/getActualCurrencyRates';
 import getToken from '../../utils/getToken';

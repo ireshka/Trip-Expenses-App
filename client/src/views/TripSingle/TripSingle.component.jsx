@@ -4,7 +4,7 @@ import moment from 'moment';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import ContentWrapper from '../../components/ContentWrapper';
+import ContentWrapper from '../../components/ContentWrapper/ContentWrapper.component';
 import {
   InfoWrapper,
   InnerContainer,

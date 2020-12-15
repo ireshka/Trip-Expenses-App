@@ -2,9 +2,9 @@ import axios from 'axios';
 import React from 'react';
 import { connect } from 'react-redux';
 
-import Button from '../../components/Button';
-import ContentWrapper from '../../components/ContentWrapper';
-import ErrorMessage from '../../components/ErrorMessage';
+import Button from '../../components/Button/Button.component';
+import ContentWrapper from '../../components/ContentWrapper/ContentWrapper.component';
+import ErrorMessage from '../../components/ErrorMessage/ErrorMessage.component';
 import { Form, Input, Label } from '../../components/styled';
 import { setCurrencyList, setLoggedIn, setUserId } from '../../redux/actions/userActions';
 import getSupportedCurrencies from '../../utils/getSupportedCurrencies';

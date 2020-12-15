@@ -5,9 +5,9 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-import LogoImg from '../images/logo.png';
-import { clearState, setLoggedOut } from '../redux/actions/userActions';
-import { theme } from '../utils/theme';
+import LogoImg from '../../images/logo.png';
+import { clearState, setLoggedOut } from '../../redux/actions/userActions';
+import { theme } from '../../utils/theme';
 
 const HeaderWrapper = styled.div`
   align-items: center;

@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
-import ContentWrapper from '../../components/ContentWrapper';
+import ContentWrapper from '../../components/ContentWrapper/ContentWrapper.component';
 import {
   LinkText,
   NavLinksContainer,

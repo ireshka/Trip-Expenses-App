@@ -2,10 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
-import { setChoosenExpense } from '../redux/actions/userActions';
-import { theme } from '../utils/theme';
-import { Chip } from './Chip';
-import { LinkButtonSmall, Ul } from './styled';
+import { setChoosenExpense } from '../../redux/actions/userActions';
+import { theme } from '../../utils/theme';
+import { Chip } from '../Chip/Chip.component';
+import { LinkButtonSmall, Ul } from '../styled';
 
 const ExpenseButtonSmall = styled(LinkButtonSmall)`
   margin: 0;

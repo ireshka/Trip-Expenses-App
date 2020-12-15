@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { theme } from '../utils/theme';
-import { H2 } from './styled';
+import { theme } from '../../utils/theme';
+import { H2 } from '../styled';
 
 const Wrapper = styled.div`
   background-color: rgba(255, 255, 255, 0.85);

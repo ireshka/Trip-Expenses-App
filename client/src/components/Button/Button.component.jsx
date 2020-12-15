@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { theme } from '../utils/theme';
+import { theme } from '../../utils/theme';
 
 const DefaultButton = styled.button`
   background-color: ${theme.colors.white};
