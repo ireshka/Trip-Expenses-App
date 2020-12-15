@@ -4,8 +4,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import ContentWrapper from '../../components/ContentWrapper/ContentWrapper.component';
-import ExpenseLine, { ExpensesList } from '../../components/ExpensesList/ExpensesList.component';
-import { LinkButtonBig, LinkText, NavLinksContainer, TripHeader } from '../../components/styled';
+import ExpenseLine from '../../components/ExpensesLine/ExpensesLine.component';
+import {
+  LinkButtonBig,
+  LinkText,
+  NavLinksContainer,
+  TripHeader,
+  Ul,
+} from '../../components/styled';
 import getToken from '../../utils/getToken';
 
 class ExpensesAll extends Component {
@@ -57,7 +63,7 @@ class ExpensesAll extends Component {
             Add a new expense
           </LinkButtonBig>
           {this.state.expenses.length > 0 ? (
-            <ExpensesList>
+            <Ul>
               {this.state.expenses.map((expense) => {
                 return (
                   <ExpenseLine
@@ -67,7 +73,7 @@ class ExpensesAll extends Component {
                   />
                 );
               })}
-            </ExpensesList>
+            </Ul>
           ) : (
             <p>Oh, you haven't entered any expenses yet.</p>
           )}
