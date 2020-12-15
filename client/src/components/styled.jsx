@@ -2,13 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
-// import { theme } from '../utils/theme';
-
 export const H2 = styled.h2`
   font-size: 24px;
   font-weight: 400;
 `;
-export const H3 = styled.h2`
+export const H3 = styled.h3`
   font-size: 19px;
   font-weight: 400;
 `;

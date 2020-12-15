@@ -1,66 +1,34 @@
 import React from 'react';
-import styled from 'styled-components';
 
-import { focusStyle } from '../../utils/mixins';
-import { theme } from '../../utils/theme';
-
-const FooterWrapper = styled.div`
-  background-color: ${theme.colors.dark};
-  margin-top: auto;
-  padding: 10px 20px;
-  text-align: center;
-  width: 100%;
-`;
-
-const Paragraph = styled.p`
-  color: ${theme.colors.neutralExtraLight};
-  font-size: 12px;
-`;
-
-const Link = styled.a`
-  border-bottom: 0 solid transparent;
-  border-radius: ${theme.radius.sm};
-  color: ${theme.colors.btnMainLight};
-  cursor: pointer;
-  font-size: 12px;
-  padding: 0 0.2rem;
-  text-decoration: none;
-  transition: 0.3s all;
-  &:hover {
-    border-bottom: 1px solid ${theme.colors.btnMainLight};
-  }
-  &:focus {
-    ${focusStyle}
-  }
-`;
+import { StyledFooterWrapper, StyledLink, StyledParagraph } from './Footer.styles';
 
 const Footer = () => {
   return (
-    <FooterWrapper>
-      <Paragraph>
+    <StyledFooterWrapper>
+      <StyledParagraph>
         Trip Expenses App: active maintainer{' '}
-        <Link href="https://github.com/ireshka" title="See ireshka Github profile">
+        <StyledLink href="https://github.com/ireshka" title="See ireshka Github profile">
           ireshka
-        </Link>
+        </StyledLink>
         {', '}
         originally created by Warsaw Group during{' '}
-        <Link href="https://coderscamp.edu.pl/" title="See CodersCamp Page">
+        <StyledLink href="https://coderscamp.edu.pl/" title="See CodersCamp Page">
           Coderscamp 2019/2020 edition
-        </Link>
+        </StyledLink>
         {'.'}
-      </Paragraph>
-      <Paragraph>
+      </StyledParagraph>
+      <StyledParagraph>
         More info and source code{' '}
-        <Link href="https://github.com/ireshka/Trip-Expenses-App.git" title="See on Github">
+        <StyledLink href="https://github.com/ireshka/Trip-Expenses-App.git" title="See on Github">
           here
-        </Link>
+        </StyledLink>
         {'. '}
         Project licensed under a{' '}
-        <Link href="https://opensource.org/licenses/MIT" title="See license text">
+        <StyledLink href="https://opensource.org/licenses/MIT" title="See license text">
           MIT license.
-        </Link>
-      </Paragraph>
-    </FooterWrapper>
+        </StyledLink>
+      </StyledParagraph>
+    </StyledFooterWrapper>
   );
 };
 
